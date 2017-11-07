@@ -1,0 +1,38 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Cheese</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                    <tr th:each="cheese : ${cheese}">
+                        <td th:text="${cheese.cheeseID}"></td>
+                        <td th:text="${cheese.cheeseName}"></td>
+                        <td th:text="${cheese.price}"></td>
+                        <td th:text="${cheese.stock}"></td>
+                    </tr>
+                </table>
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

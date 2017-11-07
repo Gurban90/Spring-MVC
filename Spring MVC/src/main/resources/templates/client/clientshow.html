@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Client</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>E-Mail</th>
+                    </tr>
+                    <tr th:each="client : ${client}">
+                        <td th:text="${client.clientID}"></td>
+                        <td th:text="${client.firstName}"></td>
+                        <td th:text="${client.lastName}"></td>
+                        <td th:text="${client.eMail}"></td>
+                    </tr>
+                </table>
+            <br>
+            </br>
+                <table style="width:80%">
+
+                    <tr>
+                        <th>AddressID</th>
+                        <th>HouseNumber</th>
+                        <th>HouseNumberAddition</th>
+                        <th>Street Name</th>
+                        <th>Postal Code</th>
+                        <th>City</th>
+                    </tr>
+                    <tr th:each="address : ${addresses}">
+                        <td th:text="${address.addressID}"></td>
+                        <td th:text="${address.housenumber}"></td>
+                        <td th:text="${address.houseNumberAddition}"></td>
+                        <td th:text="${address.streetname}"></td>
+                        <td th:text="${address.postalCode}"></td>
+                        <td th:text="${address.city}"></td>
+                    </tr>
+                </table>
+
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

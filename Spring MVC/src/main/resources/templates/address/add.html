@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="post" th:object="${address}">
+            <table>
+                <tr>
+                    <td>Housenumber</td>
+                    <td><input type="text" th:field="*{housenumber}" /></td>
+                    <td th:if="${#fields.hasErrors('housenumber')}" th:errors="*{housenumber}">Housenumber Error</td>
+                </tr>
+                <tr>
+                    <td>Housenumber Addition</td>
+                    <td><input type="text" th:field="*{houseNumberAddition}" /></td>
+                </tr>
+                <tr>
+                    <td>Streetname</td>
+                    <td><input type="text" th:field="*{streetname}" /></td>
+                    <td th:if="${#fields.hasErrors('streetname')}" th:errors="*{streetname}">Streetname Error</td>
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td><input type="text" th:field="*{postalCode}" /></td>
+                    <td th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Postal Code Error</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td><input type="text" th:field="*{city}" /></td>
+                    <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</td>
+                </tr>
+                <tr>
+                    <td>Your ClientID</td>
+                    <td>
+                        <select name="clientID">
+                            <option th:each="client : ${clients}"
+                                    th:text="${client.clientID}"
+                                    th:value="${client.clientID}"></option>
+                        </select>   
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        </br>
+        <table style="width:80%;
+               border:1px solid black;
+               border-collapse: collapse;
+               padding: 5px;
+               text-align: left;">
+
+            <tr style="
+                border:1px solid black;
+                border-collapse: collapse;">
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>E-Mail</th>
+
+            </tr>
+            <tr style="
+                border:1px solid black;
+                border-collapse: collapse;" 
+                th:each="client : ${clients}">
+                <td style="
+                border:1px solid black;
+                border-collapse: collapse;" 
+                th:text="${client.clientID}"></td>
+                <td style="
+                border:1px solid black;
+                border-collapse: collapse;" 
+                th:text="${client.firstName}"></td>
+                <td style="
+                border:1px solid black;
+                border-collapse: collapse;" 
+                th:text="${client.lastName}"></td>
+                <td style="
+                border:1px solid black;
+                border-collapse: collapse;" 
+                th:text="${client.eMail}"></td>
+
+            </tr>
+        </table>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>
