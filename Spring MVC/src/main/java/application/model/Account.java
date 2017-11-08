@@ -34,11 +34,10 @@ public class Account {
     @Min(0)
     private int accountStatus;
     
-    /*
     @OneToOne
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private Client client;
-    */
+    
     public Account() {
     }
 
@@ -46,7 +45,7 @@ public class Account {
         this.password = password;
         this.accountStatus = accountStatus;
     }
-    /*
+    
     public Client getClient() {
         return client;
     }
@@ -54,7 +53,7 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
-    */
+    
     public int getAccountID() {
         return accountID;
     }
@@ -70,8 +69,6 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    
 
     public int getAccountStatus() {
         return accountStatus;

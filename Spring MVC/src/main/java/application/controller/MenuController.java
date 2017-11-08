@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Gerben
  */
 @Controller
-@RequestMapping("")
+@RequestMapping("main")
 public class MenuController {
     
     @RequestMapping("")

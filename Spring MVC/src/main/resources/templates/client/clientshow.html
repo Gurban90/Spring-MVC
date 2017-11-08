@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1 th:text="${title}">Default Title</h1>
-        
+
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -28,8 +28,8 @@
                         <td th:text="${client.eMail}"></td>
                     </tr>
                 </table>
-            <br>
-            </br>
+                <br>
+                </br>
                 <table style="width:80%">
 
                     <tr>
@@ -39,6 +39,7 @@
                         <th>Street Name</th>
                         <th>Postal Code</th>
                         <th>City</th>
+                        <th>AddressType</th>
                     </tr>
                     <tr th:each="address : ${addresses}">
                         <td th:text="${address.addressID}"></td>
@@ -47,6 +48,26 @@
                         <td th:text="${address.streetname}"></td>
                         <td th:text="${address.postalCode}"></td>
                         <td th:text="${address.city}"></td>
+                        <td th:text="${address.addresstype.addressTypeName}"></td>
+                    </tr>
+                </table>
+
+                <br>
+                </br>
+                <table style="width:80%">
+                    <tr>
+                        <th>OrderID</th>
+                        <th>OrderDate</th>
+                        <th>ProcessedDate</th>
+                        <th>Total Price</th>
+                        <th>View</th>
+                    </tr>
+                    <tr th:each="orders : ${orders}">
+                        <td th:text="${orders.ordersID}"></td>
+                        <td th:text="${orders.orderDate}"></td>
+                        <td th:text="${orders.processedDate}"></td>
+                        <td th:text="${orders.totalPrice}"></td>
+                         <td><a th:href="${'/order/' + orders.ordersID}">View</a></td>
                     </tr>
                 </table>
 

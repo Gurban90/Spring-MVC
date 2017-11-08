@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Gerben
  */
 @Controller
-@RequestMapping("address") //NOG HTML DOEN!!!!!!!!!!!!!!
+@RequestMapping("address")
 public class AddressController {
 
     @Autowired
@@ -64,22 +64,15 @@ public class AddressController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddAddress(@ModelAttribute @Valid Address newAddress,
+    public String processAddAddress(Address newAddress,
             Errors errors, @RequestParam int clientID, @RequestParam int addressTypeID, Model model) {
-
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Address");
-            model.addAttribute("clients", clientDao.findAll());
-            model.addAttribute("addresstypes", addressTypeDao.findAll());
-            errors.toString();
-            return "address/add";
-        }
+       
         Client cat = clientDao.findOne(clientID);
         AddressType type = addressTypeDao.findOne(addressTypeID);
         newAddress.setClient(cat);
         newAddress.setAddresstype(type);
         addressDao.save(newAddress);
-        return "redirect:";
+        return "redirect:/main";
     }
 
     @RequestMapping(value = "remove/{addressID}", method = RequestMethod.GET)

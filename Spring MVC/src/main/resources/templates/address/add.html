@@ -12,8 +12,8 @@
             <table>
                 <tr>
                     <td>Housenumber</td>
-                    <td><input type="text" th:field="*{housenumber}" /></td>
-                    <td th:if="${#fields.hasErrors('housenumber')}" th:errors="*{housenumber}">Housenumber Error</td>
+                    <td><input type="number" min="0" th:field="*{housenumber}" /></td>
+                    
                 </tr>
                 <tr>
                     <td>Housenumber Addition</td>
@@ -21,18 +21,18 @@
                 </tr>
                 <tr>
                     <td>Streetname</td>
-                    <td><input type="text" th:field="*{streetname}" /></td>
-                    <td th:if="${#fields.hasErrors('streetname')}" th:errors="*{streetname}">Streetname Error</td>
+                    <td><input type="text" maxlength="10" minlength="1" th:field="*{streetname}" /></td>
+                    
                 </tr>
                 <tr>
                     <td>Postal Code</td>
-                    <td><input type="text" th:field="*{postalCode}" /></td>
-                    <td th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Postal Code Error</td>
+                    <td><input type="text" maxlength="7" minlength="6" th:field="*{postalCode}" /></td>
+                    
                 </tr>
                 <tr>
                     <td>City</td>
-                    <td><input type="text" th:field="*{city}" /></td>
-                    <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</td>
+                    <td><input type="text" maxlength="30" minlength="1" th:field="*{city}" /></td>
+                    
                 </tr>
                 <tr>
                     <td>Your ClientID</td>

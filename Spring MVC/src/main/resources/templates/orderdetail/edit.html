@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Cheese</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr th:each="orderdetail : ${orderdetail}">
+                        <td th:text="${orderdetail.orderDetailID}"></td>
+                        <td th:text="${orderdetail.cheese.cheeseName}"></td>
+                        <td th:text="${orderdetail.quantity}"></td>
+
+                    </tr>
+                </table>
+                <br></br>
+                <form method="POST" th:object="${orderdetail}">
+                    <input type="hidden" th:field="*{orderDetailID}"/>
+                    <input type="hidden" th:field="*{cheese}"/>
+                    <input type="hidden" th:field="*{orders}"/>
+                    <table>
+                        <tr>
+                            <td>Quantity</td>
+                            <td><input type="number" min="1" th:field="*{quantity}" /></td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit">Submit</button></td>
+                            <td><button type="reset">Reset</button></td>
+                        </tr>
+                    </table>
+                </form>
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+            </body>
+        </html>
+
+

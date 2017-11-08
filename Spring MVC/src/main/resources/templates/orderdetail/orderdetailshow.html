@@ -16,17 +16,17 @@
 
                     <tr>
                         <th>Id</th>
-                        <th>Order Date</th>
-                        <th>Processed Date</th>
+                        <th>Cheese</th>
+                        <th>Quanity</th>
                         <th>Total Price</th>
                         <th>ClientID</th>
                     </tr>
-                    <tr th:each="orders : ${order}">
-                        <td th:text="${orders.ordersID}"></td>
-                        <td th:text="${orders.orderDate}"></td>
-                        <td th:text="${orders.processedDate}"></td>
-                        <td th:text="${orders.totalPrice}"></td>
-                        <td th:text="${orders.client.clientID}"></td>
+                    <tr th:each="orderdetail : ${orderdetail}">
+                        <td th:text="${orderdetail.orderDetailID}"></td>
+                        <td th:text="${orderdetail.cheese.cheeseName}"></td>
+                        <td th:text="${orderdetail.quanity}"></td>
+                        <td th:text="${orderdetail.totalPrice}"></td>
+                        <td th:text="${orderdetail.client.clientID}"></td>
                     </tr>
                 </table>
                 <br>
@@ -37,6 +37,7 @@
                         <th>OrderDetailID</th>
                         <th>Quantity</th>
                         <th>Cheese</th>
+                        <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -44,6 +45,7 @@
                         <td th:text="${orderdetail.orderDetailID}"></td>
                         <td th:text="${orderdetail.quantity}"></td>
                         <td th:text="${orderdetail.cheese.cheeseName}"></td>
+                        <td><a th:href="${'/orderdetail/' + orderdetail.orderDetailID}">View</a></td>
                         <td><a th:href="${'/orderdetail/edit/' + orderdetail.orderDetailID}">Edit</a></td>
                         <td><a th:href="${'/orderdetail/remove/' + orderdetail.orderDetailID}">Delete</a></td>
                     </tr>

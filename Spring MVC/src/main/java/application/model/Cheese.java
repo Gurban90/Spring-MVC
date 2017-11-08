@@ -41,6 +41,9 @@ public class Cheese {
     @Min(0)    
     private int stock;
 
+     @OneToMany(mappedBy = "cheese")
+    private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+    
     public Cheese() {
     }
 
@@ -50,10 +53,6 @@ public class Cheese {
         this.stock = stock;
     }
 
-   
-
-   
-
     public int getCheeseID() {
         return cheeseID;
     }
@@ -61,8 +60,6 @@ public class Cheese {
     public void setCheeseID(int cheeseID) {
         this.cheeseID = cheeseID;
     }
-
-   
 
     public String getCheeseName() {
         return cheeseName;
@@ -88,6 +85,15 @@ public class Cheese {
         this.stock = stock;
     }
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    
     
 
 }

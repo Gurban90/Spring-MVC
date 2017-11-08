@@ -47,7 +47,7 @@ public class OrdersController {
     public String showOrder(@PathVariable int orderID, Model model) {
         model.addAttribute("title", "Orders");
         model.addAttribute("order", orderDao.findOne(orderID));
-        //model.addAttribute("orderdetails", orderDao.findOne(orderID).getOrderDetails());
+        model.addAttribute("orderdetails", orderDao.findOne(orderID).getOrderDetails());
         return "order/ordershow";
     }
 
@@ -67,7 +67,7 @@ public class OrdersController {
         Client cat = clientDao.findOne(clientID);
         newOrder.setClient(cat);
         orderDao.save(newOrder);
-        return "redirect:";
+        return "redirect:/order/";
     }
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.GET)
@@ -90,6 +90,7 @@ public class OrdersController {
         model.addAttribute("clients", clientDao.findAll());
         return "order/edit";
     }
-
+    
+      
    
 }

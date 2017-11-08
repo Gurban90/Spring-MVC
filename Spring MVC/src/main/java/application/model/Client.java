@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
@@ -44,6 +45,9 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private List<Orders> orders = new ArrayList<Orders>();
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private Account account;
 
     public Client() {
     }
@@ -100,6 +104,14 @@ public class Client {
 
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

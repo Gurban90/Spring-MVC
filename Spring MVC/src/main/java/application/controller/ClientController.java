@@ -5,7 +5,9 @@
  */
 package application.controller;
 
+import application.model.Account;
 import application.model.Client;
+import application.model.repository.AccountRepository;
 import application.model.repository.AddressRepository;
 import application.model.repository.ClientRepository;
 import javax.validation.Valid;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,6 +31,9 @@ public class ClientController {
 
     @Autowired
     private ClientRepository clientDao;
+
+    @Autowired
+    private AccountRepository accountDao;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -41,18 +47,19 @@ public class ClientController {
         model.addAttribute("title", "Client");
         model.addAttribute("client", clientDao.findOne(clientID));
         model.addAttribute("addresses", clientDao.findOne(clientID).getAddresses());
+        model.addAttribute("orders", clientDao.findOne(clientID).getOrders());
         return "client/clientshow";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddClient(Model model) {
+    @RequestMapping(value = "add/{accountID}", method = RequestMethod.GET)
+    public String displayAddClient(Model model, @PathVariable int accountID) {
         model.addAttribute("title", "Add Client");
         model.addAttribute(new Client());
         return "client/add";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddClient(@ModelAttribute @Valid Client newClient,
+    @RequestMapping(value = "add/{accountID}", method = RequestMethod.POST)
+    public String processAddClient(@ModelAttribute @Valid Client newClient, @PathVariable int accountID,
             Errors errors, Model model) {
 
         if (errors.hasErrors()) {
@@ -60,6 +67,9 @@ public class ClientController {
             errors.toString();
             return "client/add";
         }
+        Account acc = accountDao.findOne(accountID);
+        acc.setClient(newClient);
+        newClient.setAccount(acc);
         newClient.setAddresses(null);
         clientDao.save(newClient);
         return "redirect:/address/add";

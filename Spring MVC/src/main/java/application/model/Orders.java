@@ -43,10 +43,10 @@ public class Orders {
     
     @Digits(integer=6, fraction=2)
     private BigDecimal totalPrice;
-/*
+
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-*/
+
     public Orders() {
     }
 
@@ -64,7 +64,7 @@ public class Orders {
     public void setOrdersID(int ordersID) {
         this.ordersID = ordersID;
     }
-/*
+
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
@@ -72,7 +72,7 @@ public class Orders {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
-*/
+
     public Client getClient() {
         return client;
     }
