@@ -2,7 +2,7 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
     <head>
-        <title th:text="${title}">Cheese</title>
+        <title th:text="${title}">Address</title>
         <meta charset="UTF-8" />
     </head>
     <body>
@@ -12,7 +12,7 @@
         <a href="/address">Addresses</a>
         <a href="/addresstype">AddressTypes</a>
         <a href="/account">Accounts</a><br></br>
-        <a href="/cheese/add">Add Cheese</a>
+        <a href="/addresstype/add">Add AddressType</a>
 
         <style>
             table, th, td {
@@ -25,22 +25,18 @@
 
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Stock</th>
+                        <th>AddressType</th>
                         <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
 
-                    <tr th:each="cheese : ${cheeses}">
-                        <td th:text="${cheese.cheeseID}"></td>
-                        <td th:text="${cheese.cheeseName}"></td>
-                        <td th:text="${cheese.price}"></td>
-                        <td th:text="${cheese.stock}"></td>
-                        <td><a th:href="${'/cheese/' + cheese.cheeseID}">View</a></td>
-                        <td><a th:href="${'/cheese/edit/' + cheese.cheeseID}">Edit</a></td>
-                        <td><a th:href="${'/cheese/remove/' + cheese.cheeseID}">Delete</a></td>
+                    <tr th:each="addresstype : ${addresstypes}">
+                        <td th:text="${addresstype.addressTypeID}"></td>
+                        <td th:text="${addresstype.addressTypeName}"></td>
+                        <td><a th:href="${'/addresstype/' + addresstype.addressTypeID}">View</a></td>
+                        <td><a th:href="${'/addresstype/edit/' + addresstype.addressTypeID}">Edit</a></td>
+                        <td><a th:href="${'/addresstype/remove/' + addresstype.addressTypeID}">Delete</a></td>
                     </tr>
 
                 </table>

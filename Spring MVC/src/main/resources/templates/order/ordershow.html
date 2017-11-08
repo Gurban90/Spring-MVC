@@ -1,0 +1,40 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Order</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Order Date</th>
+                        <th>Processed Date</th>
+                        <th>Total Price</th>
+                        <th>ClientID</th>
+                    </tr>
+                    <tr th:each="orders : ${order}">
+                        <td th:text="${orders.ordersID}"></td>
+                        <td th:text="${orders.orderDate}"></td>
+                        <td th:text="${orders.processedDate}"></td>
+                        <td th:text="${orders.totalPrice}"></td>
+                        <td th:text="${orders.client.clientID}"></td>
+                    </tr>
+                </table>
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

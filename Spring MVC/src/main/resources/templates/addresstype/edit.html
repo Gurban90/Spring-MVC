@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="POST" th:object="${addresstype}">
+            <input type="hidden" th:field="*{addressTypeID}"/>
+            <table>
+                <tr>
+                    <td>AddressType</td>
+                    <td><input type="text" th:field="*{addressTypeName}" /></td>
+                    <td th:if="${#fields.hasErrors('addressTypeName')}" th:errors="*{addressTypeName}">AddressType Error</td>
+                </tr>
+               
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>
+
+

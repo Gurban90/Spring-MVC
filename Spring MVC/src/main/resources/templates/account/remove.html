@@ -16,28 +16,20 @@
 
             <table style="width:80%">
 
-                   <tr>
+                    <tr>
                         <th>Id</th>
-                        <th>HouseNumber</th>
-                        <th>HouseNumber Addition</th>
-                        <th>Streetname</th>
-                        <th>Postal Code</th>
-                        <th>City</th>
-                        <th>ClientID</th>
+                        <th>Password</th>
+                        <th>Status</th>
                     </tr>
-                    <tr th:each="address : ${address}">
-                        <td th:text="${address.addressID}"></td>
-                        <td th:text="${address.housenumber}"></td>
-                        <td th:text="${address.houseNumberAddition}"></td>
-                        <td th:text="${address.streetname}"></td>
-                        <td th:text="${address.postalCode}"></td>
-                        <td th:text="${address.city}"></td>
-                        <td th:text="${address.client.clientID}"></td>
-                        <td th:text="${address.addresstype.addressTypeID}"></td>
+                    <tr th:each="account : ${account}">
+                        <td th:text="${account.accountID}"></td>
+                        <td th:text="${account.password}"></td>
+                        <td th:text="${account.accountStatus}"></td>
+                        
                     </tr>
                 </table>
                 <form method="POST">
-                    <p>Are you sure you want to delete this Address?</p>
+                    <p>Are you sure you want to delete this Account?</p>
                     <button type="submit">Submit</button>
                 </form>
                 <button onclick="goBack()">Go Back</button>

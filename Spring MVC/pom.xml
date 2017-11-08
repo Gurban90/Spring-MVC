@@ -5,7 +5,7 @@
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Spring MVC</name>
+    <name>W2 Spring MVC</name>
     <description>Spring MVC</description>
     <parent>
         <groupId>org.springframework.boot</groupId>

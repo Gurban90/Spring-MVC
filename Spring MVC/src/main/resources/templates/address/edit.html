@@ -12,24 +12,53 @@ and open the template in the editor.
     <body>
         <h1 th:text="${title}">Default Title</h1>
 
-        <form method="POST" th:object="${cheese}">
-            <input type="hidden" th:field="*{cheeseID}"/>
+        <form method="POST" th:object="${address}">
+            <input type="hidden" th:field="*{addressID}"/>
             <table>
                 <tr>
-                    <td>CheeseName</td>
-                    <td><input type="text" th:field="*{cheeseName}" /></td>
-                    <td th:if="${#fields.hasErrors('cheeseName')}" th:errors="*{cheeseName}">Name Error</td>
+                    <td>Housenumber</td>
+                    <td><input type="text" th:field="*{housenumber}" /></td>
+                    <td th:if="${#fields.hasErrors('housenumber')}" th:errors="*{housenumber}">Housenumber Error</td>
                 </tr>
                 <tr>
-                    <td>Price</td>
-                    <td><input type="number" placeholder="0.00" min="0" value="0" step="0.01" th:field="*{price}" /></td>
-                    <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</td>
-                </tr>  
+                    <td>Housenumber Addition</td>
+                    <td><input type="text" th:field="*{houseNumberAddition}" /></td>
+                </tr>
                 <tr>
-                    <td>Stock</td>
-                    <td><input type="number" th:field="*{stock}" /></td>
-                    <td th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">Stock Error</td>
-                </tr>  
+                    <td>Streetname</td>
+                    <td><input type="text" th:field="*{streetname}" /></td>
+                    <td th:if="${#fields.hasErrors('streetname')}" th:errors="*{streetname}">Streetname Error</td>
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td><input type="text" th:field="*{postalCode}" /></td>
+                    <td th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Postal Code Error</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td><input type="text" th:field="*{city}" /></td>
+                    <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</td>
+                </tr>
+                <tr>
+                    <td>Your ClientID</td>
+                    <td>
+                        <select name="clientID">
+                            <option th:each="client : ${clients}"
+                                    th:text="${client.clientID}"
+                                    th:value="${client.clientID}"></option>
+                        </select>   
+                    </td>
+                </tr>
+                 <tr>
+                    <td>AddressType</td>
+                    <td>
+                        <select name="addressTypeID">
+                            <option th:each="addresstype : ${addresstypes}"
+                                    th:text="${addresstype.addressTypeName}"
+                                    th:value="${addresstype.addressTypeID}"></option>
+                        </select>   
+                    </td>
+                </tr>
                 <tr>
                     <td><button type="submit">Submit</button></td>
                     <td><button type="reset">Reset</button></td>

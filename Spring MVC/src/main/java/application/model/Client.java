@@ -42,6 +42,9 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<Address>();
 
+    @OneToMany(mappedBy = "client")
+    private List<Orders> orders = new ArrayList<Orders>();
+
     public Client() {
     }
 
@@ -90,7 +93,13 @@ public class Client {
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
-    
-    
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
 
 }

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Gerben
  */
 @Controller
-@RequestMapping("client")//CLIENT WITH ADDRESS AND ORDERS
+@RequestMapping("client")
 public class ClientController {
 
     @Autowired

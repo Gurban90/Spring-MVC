@@ -38,23 +38,27 @@ public class Address {
     private String streetname;
 
     @NotNull
-    @Size(min = 6, max = 7, message = "PostalCode should be this for: 0000AA.")
+    @Size(min = 6, max = 7, message = "PostalCode should be this form: 0000AA.")
     private String postalCode;
 
     @NotNull
     @Size(min = 3, max = 30)
     private String city;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "ClientID", referencedColumnName = "clientID")
+    @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private Client client;
+    
+    @ManyToOne
+    @JoinColumn(name="addressTypeID", referencedColumnName="addressTypeID")
+    private AddressType addresstype;
 
     public Address() {
     }
 
     public Address(String Streetname, Integer HouseNumber, String HouseNumberAddition,
             String PostalCode, String City) {
-
         this.streetname = Streetname;
         this.housenumber = HouseNumber;
         this.houseNumberAddition = HouseNumberAddition;
@@ -118,5 +122,15 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public AddressType getAddresstype() {
+        return addresstype;
+    }
+
+    public void setAddresstype(AddressType addresstype) {
+        this.addresstype = addresstype;
+    }
+    
+    
 
 }

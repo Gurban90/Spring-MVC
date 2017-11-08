@@ -16,28 +16,23 @@
 
             <table style="width:80%">
 
-                   <tr>
-                        <th>Id</th>
-                        <th>HouseNumber</th>
-                        <th>HouseNumber Addition</th>
-                        <th>Streetname</th>
-                        <th>Postal Code</th>
-                        <th>City</th>
+                    <tr>
+                       <th>Id</th>
+                        <th>Order Date</th>
+                        <th>Processed Date</th>
+                        <th>Total Price</th>
                         <th>ClientID</th>
                     </tr>
-                    <tr th:each="address : ${address}">
-                        <td th:text="${address.addressID}"></td>
-                        <td th:text="${address.housenumber}"></td>
-                        <td th:text="${address.houseNumberAddition}"></td>
-                        <td th:text="${address.streetname}"></td>
-                        <td th:text="${address.postalCode}"></td>
-                        <td th:text="${address.city}"></td>
-                        <td th:text="${address.client.clientID}"></td>
-                        <td th:text="${address.addresstype.addressTypeID}"></td>
+                     <tr th:each="orders : ${order}">
+                        <td th:text="${orders.ordersID}"></td>
+                        <td th:text="${orders.orderDate}"></td>
+                        <td th:text="${orders.processedDate}"></td>
+                        <td th:text="${orders.totalPrice}"></td>
+                        <td th:text="${orders.client.clientID}"></td>
                     </tr>
                 </table>
                 <form method="POST">
-                    <p>Are you sure you want to delete this Address?</p>
+                    <p>Are you sure you want to delete this Order?</p>
                     <button type="submit">Submit</button>
                 </form>
                 <button onclick="goBack()">Go Back</button>
