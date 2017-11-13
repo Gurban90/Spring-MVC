@@ -5,9 +5,7 @@
  */
 package application.security;
 
-
 import application.model.Account;
-import static application.security.SecurityConstants.EXPIRATION_TIME;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,14 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
-import static application.security.SecurityConstants.EXPIRATION_TIME;
 import static application.security.SecurityConstants.HEADER_STRING;
 import static application.security.SecurityConstants.SECRET;
 import static application.security.SecurityConstants.TOKEN_PREFIX;
+import javax.servlet.http.Cookie;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -40,7 +38,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
+            HttpServletResponse res) throws AuthenticationException {
         try {
             Account creds = new ObjectMapper()
                     .readValue(req.getInputStream(), Account.class);
@@ -58,15 +56,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest req,
-                                            HttpServletResponse res,
-                                            FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
+            HttpServletResponse res,
+            FilterChain chain,
+            Authentication auth) throws IOException, ServletException {
 
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+       
     }
 }

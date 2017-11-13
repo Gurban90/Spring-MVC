@@ -11,7 +11,7 @@
         <a href="/cheese">Cheeses</a>
         <a href="/address">Addresses</a>
         <a href="/addresstype">AddressTypes</a>
-        <a href="/account">Accounts</a>
+         <a href="/account">Accounts</a>
         <a href="/order">Orders</a><br></br>
         <a href="/account/add">Add Account</a>
 
@@ -25,21 +25,21 @@
             <table style="width:80%">
 
                     <tr>
-                       <th>Id</th>
-                       <th>UserName</th>
+                        <th>AccountID</th>
+                        <th>UserName</th>
                         <th>Password</th>
-                        <th>Status</th>
+                        <th>Role</th>
                         <th>Add Client</th>
-                         <th>View</th>
+                        <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
 
                     <tr th:each="account : ${accounts}">
-                        <td th:text="${account.accountID}"></td>
-                         <td th:text="${account.username}"></td>
+                         <td th:text="${account.accountID}"></td>
+                        <td th:text="${account.username}"></td>
                         <td th:text="${account.password}"></td>
-                        <td th:text="${account.accountStatus}"></td>
+                        <td th:text="${account.theRole}"></td>
                         <td><a th:href="${'/client/add/' + account.accountID}">Add Client</a></td>
                         <td><a th:href="${'/account/' + account.accountID}">View</a></td>
                         <td><a th:href="${'/account/edit/' + account.accountID}">Edit</a></td>

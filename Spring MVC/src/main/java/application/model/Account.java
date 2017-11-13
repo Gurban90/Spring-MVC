@@ -21,15 +21,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 public class Account {
-    /*
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long accountID;
-    */
-    @Id
     private String username;
     private String password;
-    private String theRole;
+    //private String theRole;
 /*
     @NotNull
     @Min(0)
@@ -38,15 +36,16 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private Client client;
-*/
+     */
     public Account() {
     }
-/*
-    public Account(String password, Integer accountStatus) {
+
+    public Account(String username, String password) {
         this.password = password;
-        this.accountStatus = accountStatus;
+        this.username = username;
     }
 
+    /*
     public Client getClient() {
         return client;
     }
@@ -54,7 +53,7 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
-
+     */
     public long getAccountID() {
         return accountID;
     }
@@ -62,7 +61,7 @@ public class Account {
     public void setAccountID(long accountID) {
         this.accountID = accountID;
     }
-*/
+
     public String getPassword() {
         return password;
     }
@@ -70,7 +69,8 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
+
+    /*
     public int getAccountStatus() {
         return accountStatus;
     }
@@ -78,7 +78,7 @@ public class Account {
     public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
     }
-*/
+     */
     public String getUsername() {
         return username;
     }
@@ -86,7 +86,7 @@ public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    /*
     public String getTheRole() {
         return theRole;
     }
@@ -94,8 +94,6 @@ public class Account {
     public void setTheRole(String theRole) {
         this.theRole = theRole;
     }
-
-   
-    
+     */
 
 }

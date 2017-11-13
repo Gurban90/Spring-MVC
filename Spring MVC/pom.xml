@@ -60,6 +60,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency> 
+        <dependency>
+            <groupId>com.lambdaworks</groupId>
+            <artifactId>scrypt</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

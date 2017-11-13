@@ -16,20 +16,10 @@ and open the template in the editor.
             <input type="hidden" th:field="*{accountID}"/>
             <table>
                 <tr>
-                    <td>UserName</td>
-                    <td><input type="text" th:field="*{username}" /></td>
-                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">UserName Error</td>
-                </tr>
-                <tr>
                     <td>Password</td>
                     <td><input type="text" th:field="*{password}" /></td>
                     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
                 </tr>
-                <tr>
-                    <td>AccountStatus</td>
-                    <td><input type="number" th:field="*{accountStatus}" /></td>
-                    <td th:if="${#fields.hasErrors('accountStatus')}" th:errors="*{accountStatus}">AccountStatus Error</td>
-                </tr>  
                 <tr>
                     <td><button type="submit">Submit</button></td>
                     <td><button type="reset">Reset</button></td>

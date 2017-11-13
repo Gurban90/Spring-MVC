@@ -15,17 +15,19 @@
             <table style="width:80%">
 
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
+                        <th>ID</th>
+                        <th>UserName</th>
                         <th>Password</th>
                         <th>Status</th>
-                        
+                        <th>Role</th>
+
+
                     </tr>
                     <tr th:each="account : ${account}">
                         <td th:text="${account.accountID}"></td>
                         <td th:text="${account.username}"></td>
                         <td th:text="${account.password}"></td>
-                        <td th:text="${account.accountStatus}"></td>
+                        <td th:text="${account.theRole}"></td>
                     </tr>
                 </table>
                 <button onclick="goBack()">Go Back</button>

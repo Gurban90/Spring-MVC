@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Gerben
  */
 @Controller
-@RequestMapping("account")//NOG GEEN BEVEILIGING OF HASH OF IETS DERGELIJKS!!!
+@RequestMapping("account")
 public class AccountController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class AccountController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @RequestMapping("")//CHECK IF CLIENT OR NOT AND IF IS THE RIGHT CLIENT
+    @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("accounts", accountDao.findAll());
         model.addAttribute("title", "Accounts");
@@ -64,7 +64,7 @@ public class AccountController {
         }
         newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
-        return "redirect:";
+        return "redirect:/main";
     }
 
     @RequestMapping(value = "remove/{accountID}", method = RequestMethod.GET)
