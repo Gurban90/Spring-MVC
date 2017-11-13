@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Gerben
  */
 @Repository
-public interface AccountRepository extends CrudRepository<Account, Integer> {
+public interface AccountRepository extends CrudRepository<Account, Long> {
+    Account findByUsername(String username);
     
 }

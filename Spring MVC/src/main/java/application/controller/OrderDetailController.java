@@ -5,17 +5,10 @@
  */
 package application.controller;
 
-import application.helper.OrderEdit;
-import application.model.Cheese;
-import application.model.Client;
 import application.model.OrderDetail;
-import application.model.Orders;
 import application.model.repository.CheeseRepository;
-import application.model.repository.ClientRepository;
 import application.model.repository.OrderDetailRepository;
-import application.model.repository.OrdersRepository;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import application.service.OrderDetailServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +35,9 @@ public class OrderDetailController {
     private CheeseRepository cheeseDao;
 
     @Autowired
-    private OrdersRepository orderDao;
+    private OrderDetailServiceImpl orderDetailService;
 
-    @Autowired
-    private OrderEdit edit;
-
+    
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("orderdetails", orderDetailDao.findAll());
@@ -72,12 +63,8 @@ public class OrderDetailController {
     @RequestMapping(value = "add/{orderID}", method = RequestMethod.POST)
     public String processAddOrderDetail(@RequestParam int cheeseID, @PathVariable int orderID, OrderDetail newOrderDetail,
             @RequestParam int quantity, Model model) {
-        Orders ord = orderDao.findOne(orderID);
-        newOrderDetail.setOrders(ord);
-        Cheese ch = cheeseDao.findOne(cheeseID);
-        newOrderDetail.setCheese(ch);
-        edit.setCheeseOrder(orderID, cheeseID, newOrderDetail.getQuantity());
-        orderDetailDao.save(newOrderDetail);
+
+        orderDetailService.addOrderDetail(orderID, cheeseID, newOrderDetail);
         return "redirect:/order";
     }
 
@@ -90,8 +77,7 @@ public class OrderDetailController {
 
     @RequestMapping(value = "remove/{orderDetailID}", method = RequestMethod.POST)
     public String processRemoveOrderDetailForm(@PathVariable int orderDetailID) {
-        edit.deleteCheeseOrder(orderDetailID, orderDetailDao.findOne(orderDetailID).getQuantity());
-        orderDetailDao.delete(orderDetailID);
+        orderDetailService.removeOrderDetail(orderDetailID, orderDetailDao.findOne(orderDetailID).getQuantity());
         return "redirect:/order";
     }
 
@@ -111,8 +97,7 @@ public class OrderDetailController {
             errors.toString();
             return "orderdetail/edit";
         }
-        edit.editCheeseOrder(editOrderDetail);
-        orderDetailDao.save(editOrderDetail);
+        orderDetailService.editOrderDetail(editOrderDetail);
         return "redirect:/order";
     }
 

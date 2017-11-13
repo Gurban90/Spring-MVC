@@ -9,6 +9,7 @@ import application.model.Account;
 import application.model.repository.AccountRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,11 +25,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("account")//NOG GEEN BEVEILIGING OF HASH OF IETS DERGELIJKS!!!
 public class AccountController {
- 
+
     @Autowired
     private AccountRepository accountDao;
 
-    @RequestMapping("")
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @RequestMapping("")//CHECK IF CLIENT OR NOT AND IF IS THE RIGHT CLIENT
     public String index(Model model) {
         model.addAttribute("accounts", accountDao.findAll());
         model.addAttribute("title", "Accounts");
@@ -36,7 +40,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/{accountID}", method = RequestMethod.GET)
-    public String showAccount(@PathVariable int accountID, Model model) {
+    public String showAccount(@PathVariable long accountID, Model model) {
         model.addAttribute("title", "Account");
         model.addAttribute("account", accountDao.findOne(accountID));
         return "account/accountshow";
@@ -58,27 +62,26 @@ public class AccountController {
             errors.toString();
             return "account/add";
         }
-
+        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
         return "redirect:";
     }
 
     @RequestMapping(value = "remove/{accountID}", method = RequestMethod.GET)
-    public String displayRemoveAccountForm(Model model, @PathVariable int accountID) {
+    public String displayRemoveAccountForm(Model model, @PathVariable long accountID) {
         model.addAttribute("account", accountDao.findOne(accountID));
         model.addAttribute("title", "Delete Account");
         return "account/remove";
     }
 
     @RequestMapping(value = "remove/{accountID}", method = RequestMethod.POST)
-    public String processRemoveAccountForm(@PathVariable int accountID) {
+    public String processRemoveAccountForm(@PathVariable long accountID) {
         accountDao.delete(accountID);
-
         return "redirect:/account/";
     }
 
     @RequestMapping(value = "edit/{accountID}", method = RequestMethod.GET)
-    public String displayEditAccountForm(Model model, @PathVariable int accountID) {
+    public String displayEditAccountForm(Model model, @PathVariable long accountID) {
         model.addAttribute("account", accountDao.findOne(accountID));
         model.addAttribute("title", "Edit Account");
         return "account/edit";
@@ -98,4 +101,3 @@ public class AccountController {
         return "redirect:/account/";
     }
 }
-

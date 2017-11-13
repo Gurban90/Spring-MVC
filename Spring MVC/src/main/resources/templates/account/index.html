@@ -26,6 +26,7 @@
 
                     <tr>
                        <th>Id</th>
+                       <th>UserName</th>
                         <th>Password</th>
                         <th>Status</th>
                         <th>Add Client</th>
@@ -36,6 +37,7 @@
 
                     <tr th:each="account : ${accounts}">
                         <td th:text="${account.accountID}"></td>
+                         <td th:text="${account.username}"></td>
                         <td th:text="${account.password}"></td>
                         <td th:text="${account.accountStatus}"></td>
                         <td><a th:href="${'/client/add/' + account.accountID}">Add Client</a></td>

@@ -14,11 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Gerben
  */
 @Controller
-@RequestMapping("main")
+@RequestMapping("")
 public class MenuController {
     
-    @RequestMapping("")
+    @RequestMapping("/main")
     public String index(Model model) {
+        
+        model.addAttribute("title", "KaasApplicatie");
+        return "main/MainMenu";
+    }
+    
+     @RequestMapping("/")
+    public String index2(Model model) {
         
         model.addAttribute("title", "KaasApplicatie");
         return "main/MainMenu";

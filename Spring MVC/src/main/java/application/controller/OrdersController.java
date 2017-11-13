@@ -5,18 +5,13 @@
  */
 package application.controller;
 
-import application.model.Client;
 import application.model.Orders;
 import application.model.repository.ClientRepository;
 import application.model.repository.OrdersRepository;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import javax.validation.Valid;
+import application.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +30,9 @@ public class OrdersController {
 
     @Autowired
     private ClientRepository clientDao;
+
+    @Autowired
+    private OrderServiceImpl orderService;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -61,12 +59,8 @@ public class OrdersController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddOrder(@RequestParam int clientID, Orders newOrder, Model model) {
-        newOrder.setOrderDate(LocalDateTime.now());
-        newOrder.setProcessedDate(LocalDateTime.now().plusDays(7));
-        newOrder.setTotalPrice(BigDecimal.ZERO);
-        Client cat = clientDao.findOne(clientID);
-        newOrder.setClient(cat);
-        orderDao.save(newOrder);
+
+        orderService.addOrder(clientID, newOrder);
         return "redirect:/order/";
     }
 
@@ -90,7 +84,5 @@ public class OrdersController {
         model.addAttribute("clients", clientDao.findAll());
         return "order/edit";
     }
-    
-      
-   
+
 }

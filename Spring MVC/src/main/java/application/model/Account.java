@@ -21,31 +21,32 @@ import javax.validation.constraints.Size;
  */
 @Entity
 public class Account {
-
+    /*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountID;
-
-    @NotNull
-    @Size(min = 3, max = 15)
+    private long accountID;
+    */
+    @Id
+    private String username;
     private String password;
-
+    private String theRole;
+/*
     @NotNull
     @Min(0)
     private int accountStatus;
-    
+
     @OneToOne
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private Client client;
-    
+*/
     public Account() {
     }
-
+/*
     public Account(String password, Integer accountStatus) {
         this.password = password;
         this.accountStatus = accountStatus;
     }
-    
+
     public Client getClient() {
         return client;
     }
@@ -53,15 +54,15 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
-    
-    public int getAccountID() {
+
+    public long getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(int accountID) {
+    public void setAccountID(long accountID) {
         this.accountID = accountID;
     }
-
+*/
     public String getPassword() {
         return password;
     }
@@ -69,7 +70,7 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/*
     public int getAccountStatus() {
         return accountStatus;
     }
@@ -77,5 +78,24 @@ public class Account {
     public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
     }
+*/
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTheRole() {
+        return theRole;
+    }
+
+    public void setTheRole(String theRole) {
+        this.theRole = theRole;
+    }
+
+   
+    
 
 }

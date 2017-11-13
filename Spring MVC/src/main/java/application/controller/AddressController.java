@@ -11,6 +11,7 @@ import application.model.Client;
 import application.model.repository.AddressRepository;
 import application.model.repository.AddressTypeRepository;
 import application.model.repository.ClientRepository;
+import application.service.AddressServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,14 +40,17 @@ public class AddressController {
     @Autowired
     private AddressTypeRepository addressTypeDao;
 
-    @RequestMapping("")
+    @Autowired
+    private AddressServiceImpl addressService;
+
+    @RequestMapping("")//CHECK IF CLIENT OR NOT
     public String index(Model model) {
         model.addAttribute("addresses", addressDao.findAll());
         model.addAttribute("title", "Addresses");
         return "address/index";
     }
 
-    @RequestMapping(value = "/{addressID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
     public String showAddress(@PathVariable int addressID, Model model) {
         model.addAttribute("title", "Address");
         model.addAttribute("address", addressDao.findOne(addressID));
@@ -65,17 +69,13 @@ public class AddressController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddAddress(Address newAddress,
-            Errors errors, @RequestParam int clientID, @RequestParam int addressTypeID, Model model) {
-       
-        Client cat = clientDao.findOne(clientID);
-        AddressType type = addressTypeDao.findOne(addressTypeID);
-        newAddress.setClient(cat);
-        newAddress.setAddresstype(type);
-        addressDao.save(newAddress);
+            @RequestParam int clientID, @RequestParam int addressTypeID, Model model) {
+
+        addressService.addAddress(clientID, addressTypeID, newAddress);
         return "redirect:/main";
     }
 
-    @RequestMapping(value = "remove/{addressID}", method = RequestMethod.GET)
+    @RequestMapping(value = "remove/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
     public String displayRemoveAddressForm(Model model, @PathVariable int addressID) {
         model.addAttribute("address", addressDao.findOne(addressID));
         model.addAttribute("title", "Delete Address");
@@ -89,30 +89,21 @@ public class AddressController {
         return "redirect:/address/";
     }
 
-    @RequestMapping(value = "edit/{addressID}", method = RequestMethod.GET)
+    @RequestMapping(value = "edit/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
     public String displayEditAddressForm(Model model, @PathVariable int addressID) {
         model.addAttribute("address", addressDao.findOne(addressID));
         model.addAttribute("title", "Edit Address");
         model.addAttribute("clients", clientDao.findAll());
         model.addAttribute("addresstypes", addressTypeDao.findAll());
+        addressService.setClientAddressType(addressDao.findOne(addressID).getClient().getClientID(),
+                addressDao.findOne(addressID).getAddresstype().getAddressTypeID());
         return "address/edit";
     }
 
     @RequestMapping(value = "edit/{addressID}", method = RequestMethod.POST)
-    public String processEditAddressForm(@ModelAttribute @Valid Address editAddress,
-            Errors errors, @RequestParam int clientID, @RequestParam int addressTypeID, Model model) {
+    public String processEditAddressForm(Address editAddress, Model model) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Address");
-            errors.toString();
-            return "address/edit";
-        }
-
-        Client cat = clientDao.findOne(clientID);
-        AddressType type = addressTypeDao.findOne(addressTypeID);
-        editAddress.setClient(cat);
-        editAddress.setAddresstype(type);
-        addressDao.save(editAddress);
+        addressService.editAddress(editAddress);
         return "redirect:/address/";
     }
 }
