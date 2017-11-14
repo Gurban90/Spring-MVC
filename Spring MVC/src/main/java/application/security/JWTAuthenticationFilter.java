@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import static application.security.SecurityConstants.HEADER_STRING;
 import static application.security.SecurityConstants.SECRET;
 import static application.security.SecurityConstants.TOKEN_PREFIX;
-import javax.servlet.http.Cookie;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
+    private static String role;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -42,6 +42,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             Account creds = new ObjectMapper()
                     .readValue(req.getInputStream(), Account.class);
+
+            this.role = creds.getTheRole();
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -61,10 +63,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             Authentication auth) throws IOException, ServletException {
 
         String token = Jwts.builder()
+                .setId(this.role)
+                .setIssuer("KaasApplicatie")
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
+        
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-       
+
     }
 }

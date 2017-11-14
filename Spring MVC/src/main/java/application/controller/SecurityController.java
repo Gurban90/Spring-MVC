@@ -36,4 +36,11 @@ public class SecurityController {
         model.addAttribute("title", "Error 403");
         return "security/error";
     }
+
+    @RequestMapping("/confirmLogout")
+    public String logoutConfirmation(Model model) {
+        String message = "You are logged out.";
+        model.addAttribute("message", message);
+        return "security/confirmLogout";
+    }
 }

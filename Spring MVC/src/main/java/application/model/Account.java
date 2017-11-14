@@ -5,6 +5,7 @@
  */
 package application.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,18 +26,16 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long accountID;
+    @Column(unique = true)
     private String username;
     private String password;
-    //private String theRole;
-/*
-    @NotNull
-    @Min(0)
-    private int accountStatus;
+    private String theRole;
+
 
     @OneToOne
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private Client client;
-     */
+     
     public Account() {
     }
 
@@ -45,7 +44,7 @@ public class Account {
         this.username = username;
     }
 
-    /*
+   
     public Client getClient() {
         return client;
     }
@@ -53,7 +52,7 @@ public class Account {
     public void setClient(Client client) {
         this.client = client;
     }
-     */
+     
     public long getAccountID() {
         return accountID;
     }
@@ -69,16 +68,7 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    /*
-    public int getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(int accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-     */
+    
     public String getUsername() {
         return username;
     }
@@ -86,7 +76,7 @@ public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
-    /*
+   
     public String getTheRole() {
         return theRole;
     }
@@ -94,6 +84,6 @@ public class Account {
     public void setTheRole(String theRole) {
         this.theRole = theRole;
     }
-     */
+    
 
 }

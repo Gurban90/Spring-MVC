@@ -10,6 +10,7 @@ import application.model.Client;
 import application.model.repository.AccountRepository;
 import application.model.repository.AddressRepository;
 import application.model.repository.ClientRepository;
+import application.service.ClientServiceImpl;
 //import application.service.ClientServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,10 @@ public class ClientController {
 
     @Autowired
     private AccountRepository accountDao;
-/*
+
     @Autowired
     private ClientServiceImpl clientService;
-*/
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("clients", clientDao.findAll());
@@ -61,9 +62,9 @@ public class ClientController {
         model.addAttribute(new Client());
         return "client/add";
     }
-/*
+
     @RequestMapping(value = "add/{accountID}", method = RequestMethod.POST)
-    public String processAddClient(@ModelAttribute @Valid Client newClient, @PathVariable int accountID,
+    public String processAddClient(@ModelAttribute @Valid Client newClient, @PathVariable long accountID,
             Errors errors, Model model) {
 
         if (errors.hasErrors()) {
@@ -74,7 +75,7 @@ public class ClientController {
         clientService.addClient(accountID, newClient);
         return "redirect:/address/add";
     }
-*/
+
     @RequestMapping(value = "remove/{clientID}", method = RequestMethod.GET)
     public String displayRemoveClientForm(Model model, @PathVariable int clientID) {
         model.addAttribute("client", clientDao.findOne(clientID));

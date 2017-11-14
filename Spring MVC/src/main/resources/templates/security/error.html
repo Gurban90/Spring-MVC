@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-      <title>Spring Boot MVC Security using Thymeleaf</title>
+      <title>Access Denied Exception</title>
       
 </head>
 <body>
@@ -12,6 +12,7 @@
 	         <input type="submit" value="Logout"/>
 	    </form>
    </div> 	 
-   <p class="error" th:text="${errorMsg}">Error</p>
+   <p class="error" th:text="${errorMsg}">Error</p><br></br>
+    <a href="/main">Go back to Main page.</a>
 </body>
 </html> 

@@ -7,6 +7,7 @@ package application.service;
 
 import application.model.Account;
 import application.model.repository.AccountRepository;
+import java.util.Arrays;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +15,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -29,6 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(account.getUsername(), account.getPassword(), emptyList());
+        GrantedAuthority authority = new SimpleGrantedAuthority(account.getTheRole()); //ROLE_ADMIN ROLE_USER
+                return new User(account.getUsername(), account.getPassword(), Arrays.asList(authority));
     }
+    
+  
 }

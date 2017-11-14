@@ -62,6 +62,29 @@ public class AccountController {
             errors.toString();
             return "account/add";
         }
+        newAccount.setTheRole("USER");
+        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
+        accountDao.save(newAccount);
+        return "redirect:/main";
+    }
+
+    @RequestMapping(value = "addAdmin", method = RequestMethod.GET)
+    public String displayAddADMINAccount(Model model) {
+        model.addAttribute("title", "Add ADMIN Account");
+        model.addAttribute(new Account());
+        return "account/addAdmin";
+    }
+
+    @RequestMapping(value = "addAdmin", method = RequestMethod.POST)
+    public String processAddADMINAccount(@ModelAttribute @Valid Account newAccount,
+            Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add ADMIN Account");
+            errors.toString();
+            return "account/addAdmin";
+        }
+        newAccount.setTheRole("ADMIN");
         newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
         return "redirect:/main";
@@ -88,15 +111,12 @@ public class AccountController {
     }
 
     @RequestMapping(value = "edit/{accountID}", method = RequestMethod.POST)
-    public String processEditAccountForm(@ModelAttribute @Valid Account editAccount,
+    public String processEditAccountForm(@ModelAttribute Account editAccount,
             Errors errors, Model model) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Account");
-            errors.toString();
-            return "account/edit";
-        }
-
+        String Pass = editAccount.getPassword();
+        editAccount = accountDao.findOne(editAccount.getAccountID());
+        editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
         accountDao.save(editAccount);
         return "redirect:/account/";
     }

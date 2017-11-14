@@ -13,5 +13,5 @@ import application.model.Client;
  */
 public interface ClientService {
     
-    public void addClient(int accountID, Client newClient);
+    public void addClient(long accountID, Client newClient);
 }

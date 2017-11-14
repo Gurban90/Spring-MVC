@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Gerben
  */
-/*
+
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -26,7 +26,7 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository clientDao;
 
-    public void addClient(int accountID, Client newClient) {
+    public void addClient(long accountID, Client newClient) {
 
         Account acc = accountDao.findOne(accountID);
         acc.setClient(newClient);
@@ -36,4 +36,3 @@ public class ClientServiceImpl implements ClientService {
     }
 
 }
-*/
