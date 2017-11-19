@@ -6,9 +6,12 @@
 package application.security;
 
 import static application.security.SecurityConstants.SIGN_UP_URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,33 +34,36 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@Order(1000)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+   
+     @Autowired
+    JwtAuthenticationProvider authenticationProvider;
 
+/*
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/main", "/account/add").permitAll()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                //.antMatchers("/client/**").hasAuthority("ADMIN")
-                .antMatchers("/address/**").hasAuthority("USER")
+                .antMatchers("/", "/main", "/account/add", "/security/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/security/login").permitAll()
+                .antMatchers("/account/addAdmin", "/account/**", "/addresstype/**", "/address/**", "/client/**", "/adminmain").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/security/login")
-                .loginProcessingUrl("/app-login")
-                .usernameParameter("app_username")
-                .passwordParameter("app_password")
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/main.html")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/app-logout") 
+                .logoutUrl("/app-logout")
                 .logoutSuccessUrl("/security/confirmLogout")
                 .permitAll()
                 .and()
@@ -71,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+         auth.authenticationProvider(authenticationProvider);
     }
 
     @Bean
@@ -80,4 +86,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
+
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package application.controller;
+package application.controller.clientcontrollers;
 
+import application.helper.AccountChecker;
 import application.model.Orders;
 import application.model.repository.ClientRepository;
 import application.model.repository.OrdersRepository;
@@ -22,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Gerben
  */
 @Controller
-@RequestMapping("order")
-public class OrdersController {
+@RequestMapping("clientorder")
+public class OrderClientController {
 
     @Autowired
     private OrdersRepository orderDao;
@@ -34,19 +35,30 @@ public class OrdersController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private AccountChecker checker;
+
     @RequestMapping("")
     public String index(Model model) {
-        model.addAttribute("orders", orderDao.findAll());
-        model.addAttribute("title", "Orders");
-        return "order/index";
+        try {
+            model.addAttribute("orders", clientDao.findOne(checker.getClientIDofUser()).getOrders());
+            model.addAttribute("title", "Orders");
+            return "order/clientindex";
+        } catch (Exception E) {
+            return "security/error2";
+        }
     }
 
     @RequestMapping(value = "/{orderID}", method = RequestMethod.GET)
     public String showOrder(@PathVariable int orderID, Model model) {
-        model.addAttribute("title", "Orders");
-        model.addAttribute("order", orderDao.findOne(orderID));
-        model.addAttribute("orderdetails", orderDao.findOne(orderID).getOrderDetails());
-        return "order/ordershow";
+        if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
+            model.addAttribute("title", "Orders");
+            model.addAttribute("order", orderDao.findOne(orderID));
+            model.addAttribute("orderdetails", orderDao.findOne(orderID).getOrderDetails());
+            return "order/ordershow";
+        } else {
+            return "security/error";
+        }
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -58,31 +70,32 @@ public class OrdersController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddOrder(@RequestParam int clientID, Orders newOrder, Model model) {
-
-        orderService.addOrder(clientID, newOrder);
+    public String processAddOrder(Orders newOrder, Model model) {
+      
+        orderService.addOrder(checker.getClientIDofUser(), newOrder);
         return "redirect:/order/";
     }
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.GET)
     public String displayRemoveOrderForm(Model model, @PathVariable int orderID) {
-        model.addAttribute("order", orderDao.findOne(orderID));
-        model.addAttribute("title", "Delete Order");
-        return "order/remove";
+        if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
+            model.addAttribute("order", orderDao.findOne(orderID));
+            model.addAttribute("title", "Delete Order");
+            return "order/remove";
+        } else {
+            return "security/error";
+        }
     }
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.POST)
     public String processRemoveOrderForm(@PathVariable int orderID) {
-        orderDao.delete(orderID);
-        return "redirect:/order/";
-    }
+        if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
 
-    @RequestMapping(value = "edit/{orderID}", method = RequestMethod.GET)
-    public String displayEditOrderForm(Model model, @PathVariable int orderID) {
-        model.addAttribute("order", orderDao.findOne(orderID));
-        model.addAttribute("title", "Edit Order");
-        model.addAttribute("clients", clientDao.findAll());
-        return "order/edit";
+            orderDao.delete(orderID);
+            return "redirect:/order/";
+        } else {
+            return "security/error";
+        }
     }
 
 }

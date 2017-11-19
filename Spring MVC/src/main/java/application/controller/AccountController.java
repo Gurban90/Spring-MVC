@@ -7,6 +7,7 @@ package application.controller;
 
 import application.model.Account;
 import application.model.repository.AccountRepository;
+import application.security.SCryptPasswordEncoder;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,10 +29,14 @@ public class AccountController {
 
     @Autowired
     private AccountRepository accountDao;
-
+/*
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    
+*/
+    @Autowired
+    private SCryptPasswordEncoder encoder;
+    
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("accounts", accountDao.findAll());
@@ -63,7 +68,8 @@ public class AccountController {
             return "account/add";
         }
         newAccount.setTheRole("USER");
-        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
+        newAccount.setPassword(encoder.encode(newAccount.getPassword()));
+       // newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
         return "redirect:/main";
     }
@@ -85,7 +91,8 @@ public class AccountController {
             return "account/addAdmin";
         }
         newAccount.setTheRole("ADMIN");
-        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
+         newAccount.setPassword(encoder.encode(newAccount.getPassword()));
+        //newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
         return "redirect:/main";
     }
@@ -116,7 +123,8 @@ public class AccountController {
 
         String Pass = editAccount.getPassword();
         editAccount = accountDao.findOne(editAccount.getAccountID());
-        editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
+         editAccount.setPassword(encoder.encode(editAccount.getPassword()));
+       // editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
         accountDao.save(editAccount);
         return "redirect:/account/";
     }

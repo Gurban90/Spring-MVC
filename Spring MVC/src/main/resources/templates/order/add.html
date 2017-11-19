@@ -7,64 +7,18 @@
     </head>
     <body>
         <h1 th:text="${title}">Default Title</h1>
-
+        <p> Do you want to add an Order?</p>
         <form method="post" th:object="${order}">
             <table>
-               <tr>
-                    <td>Your ClientID</td>
-                    <td>
-                        <select name="clientID">
-                            <option th:each="client : ${clients}"
-                                    th:text="${client.clientID}"
-                                    th:value="${client.clientID}"></option>
-                        </select>   
-                    </td>
-                </tr>
                 <tr>
                     <td><button type="submit">Submit</button></td>
-                    <td><button type="reset">Reset</button></td>
+                    
                 </tr>
             </table>
         </form>
-         <br>
+        <br>
         </br>
-        <table style="width:80%;
-               border:1px solid black;
-               border-collapse: collapse;
-               padding: 5px;
-               text-align: left;">
 
-            <tr style="
-                border:1px solid black;
-                border-collapse: collapse;">
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>E-Mail</th>
-
-            </tr>
-            <tr style="
-                border:1px solid black;
-                border-collapse: collapse;" 
-                th:each="client : ${clients}">
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.clientID}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.firstName}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.lastName}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.eMail}"></td>
-            </tr>
-        </table>
         <button onclick="goBack()">Go Back</button>
         <script>
             function goBack() {

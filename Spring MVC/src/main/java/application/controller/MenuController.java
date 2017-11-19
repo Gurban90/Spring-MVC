@@ -30,4 +30,11 @@ public class MenuController {
         model.addAttribute("title", "KaasApplicatie");
         return "main/MainMenu";
     }
+    
+    @RequestMapping("/adminmain")
+    public String index3(Model model) {
+        
+        model.addAttribute("title", "KaasApplicatie");
+        return "main/adminmain";
+    }
 }

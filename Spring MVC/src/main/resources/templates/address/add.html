@@ -13,7 +13,7 @@
                 <tr>
                     <td>Housenumber</td>
                     <td><input type="number" min="0" th:field="*{housenumber}" /></td>
-                    
+
                 </tr>
                 <tr>
                     <td>Housenumber Addition</td>
@@ -22,27 +22,17 @@
                 <tr>
                     <td>Streetname</td>
                     <td><input type="text" maxlength="10" minlength="1" th:field="*{streetname}" /></td>
-                    
+
                 </tr>
                 <tr>
                     <td>Postal Code</td>
                     <td><input type="text" maxlength="7" minlength="6" th:field="*{postalCode}" /></td>
-                    
+
                 </tr>
                 <tr>
                     <td>City</td>
                     <td><input type="text" maxlength="30" minlength="1" th:field="*{city}" /></td>
-                    
-                </tr>
-                <tr>
-                    <td>Your ClientID</td>
-                    <td>
-                        <select name="clientID">
-                            <option th:each="client : ${clients}"
-                                    th:text="${client.clientID}"
-                                    th:value="${client.clientID}"></option>
-                        </select>   
-                    </td>
+
                 </tr>
                 <tr>
                     <td>AddressType</td>
@@ -60,46 +50,7 @@
                 </tr>
             </table>
         </form>
-        <br>
-        </br>
-        <table style="width:80%;
-               border:1px solid black;
-               border-collapse: collapse;
-               padding: 5px;
-               text-align: left;">
-
-            <tr style="
-                border:1px solid black;
-                border-collapse: collapse;">
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>E-Mail</th>
-
-            </tr>
-            <tr style="
-                border:1px solid black;
-                border-collapse: collapse;" 
-                th:each="client : ${clients}">
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.clientID}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.firstName}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.lastName}"></td>
-                <td style="
-                    border:1px solid black;
-                    border-collapse: collapse;" 
-                    th:text="${client.eMail}"></td>
-            </tr>
-        </table>
-        <button onclick="goBack()">Go Back</button>
+          <button onclick="goBack()">Go Back</button>
         <script>
             function goBack() {
                 window.history.back();

@@ -22,8 +22,6 @@ public class AccountService {
     @Autowired
     AccountRepository accountDao;
 
-   
-
     public Account getAccount(long id) {
         Account account = accountDao.findOne(id);
         return account;
@@ -36,7 +34,7 @@ public class AccountService {
         } else {
             log.error("No account found");
         }
-       
+
         return account;
     }
 
@@ -48,6 +46,6 @@ public class AccountService {
         return false;
     }
 
-  
+   
 
 }
