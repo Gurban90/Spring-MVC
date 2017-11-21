@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Address</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>AddressType</th>
+                        
+                    </tr>
+                    <tr th:each="addresstype : ${addresstype}">
+                        <td th:text="${addresstype.addressTypeID}"></td>
+                        <td th:text="${addresstype.addressTypeName}"></td>
+                       
+                    </tr>
+                </table>
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

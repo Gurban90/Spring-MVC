@@ -43,14 +43,14 @@ public class AddressController {
     @Autowired
     private AddressServiceImpl addressService;
 
-    @RequestMapping("")//CHECK IF CLIENT OR NOT
+    @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("addresses", addressDao.findAll());
         model.addAttribute("title", "Addresses");
         return "address/index";
     }
 
-    @RequestMapping(value = "/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
+    @RequestMapping(value = "/{addressID}", method = RequestMethod.GET)
     public String showAddress(@PathVariable int addressID, Model model) {
         model.addAttribute("title", "Address");
         model.addAttribute("address", addressDao.findOne(addressID));
@@ -75,7 +75,7 @@ public class AddressController {
         return "redirect:/main";
     }
 
-    @RequestMapping(value = "remove/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
+    @RequestMapping(value = "remove/{addressID}", method = RequestMethod.GET)
     public String displayRemoveAddressForm(Model model, @PathVariable int addressID) {
         model.addAttribute("address", addressDao.findOne(addressID));
         model.addAttribute("title", "Delete Address");
@@ -89,7 +89,7 @@ public class AddressController {
         return "redirect:/address/";
     }
 
-    @RequestMapping(value = "edit/{addressID}", method = RequestMethod.GET)//CHECK IF ADDRESSID IS FROM THIS CLIENT
+    @RequestMapping(value = "edit/{addressID}", method = RequestMethod.GET)
     public String displayEditAddressForm(Model model, @PathVariable int addressID) {
         model.addAttribute("address", addressDao.findOne(addressID));
         model.addAttribute("title", "Edit Address");

@@ -3,16 +3,22 @@
     <head>
         <title th:text="${title}">Your Account</title>
         <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet"/>
     </head>
     <body>
-        <h1 th:text="${title}">Default Title</h1>
-        <a href="/clientaccount">Clients</a>
-        <a href="/clientcheese">Cheeses</a>
-        <a href="/clientaddress">Addresses</a>
-        <a href="/clientaccount">Accounts</a>
-        <a href="/clientorder">Orders</a><br></br>
-        <a href="/clientaccount/add">Add Account</a>
-
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
+        <h1>Account Information</h1>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -32,9 +38,8 @@
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
-
                     <tr th:each="account : ${account}">
-                         <td th:text="${account.accountID}"></td>
+                        <td th:text="${account.accountID}"></td>
                         <td th:text="${account.username}"></td>
                         <td th:text="${account.password}"></td>
                         <td th:text="${account.theRole}"></td>
@@ -43,9 +48,6 @@
                         <td><a th:href="${'/clientaccount/edit/' + account.accountID}">Edit</a></td>
                         <td><a th:href="${'/clientaccount/remove/' + account.accountID}">Delete</a></td>
                     </tr>
-
                 </table>
-
-
             </body>
         </html>

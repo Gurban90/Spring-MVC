@@ -5,61 +5,48 @@
  */
 package application.security;
 
-import static application.security.SecurityConstants.SIGN_UP_URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import application.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- *
- * @author Gerben
- */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-@Order(1000)
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   
-     @Autowired
-    JwtAuthenticationProvider authenticationProvider;
-
-/*
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-*/
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailServiceImpl;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/main", "/account/add", "/security/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/security/login").permitAll()
+                .antMatchers("/", "/main", "/account/add", "/security/login", "/css/**").permitAll()
+                 //.antMatchers("/account/add").permitAll()
+                //.antMatchers(HttpMethod.POST, "/security/login").permitAll()
                 .antMatchers("/account/addAdmin", "/account/**", "/addresstype/**", "/address/**", "/client/**", "/adminmain").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/security/login")
-                .loginProcessingUrl("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/main.html")
+                .loginProcessingUrl("/app-login")
+                .usernameParameter("app_username")
+                .passwordParameter("app_password")
+                .defaultSuccessUrl("/main")
                 .permitAll()
                 .and()
                 .logout()
@@ -68,16 +55,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/security/error")
-                .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
-                
+                .accessDeniedPage("/security/error");
+
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-         auth.authenticationProvider(authenticationProvider);
+        auth.userDetailsService(userDetailServiceImpl).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Bean
@@ -86,5 +70,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
-
 }

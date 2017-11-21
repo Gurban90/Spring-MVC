@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Client</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <a href="/client">Clients</a>
+        <a href="/cheese">Cheeses</a>
+        <a href="/address">Addresses</a>
+        <a href="/addresstype">AddressTypes</a>
+        <a href="/account">Accounts</a>
+        <a href="/order">Orders</a>
+        <br></br>
+        <p>Welcome!</p>
+        <a href="/account/add">Add Account</a>
+        <a href="/security/login">Login</a>
+        <br>
+        </br>
+         <form th:action="@{/app-logout}" method="POST">
+	         <input type="submit" value="Logout"/>
+	    </form>
+    </body>
+</html>

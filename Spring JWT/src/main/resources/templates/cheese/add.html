@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="post" th:object="${cheese}">
+            <table>
+                <tr>
+                    <td>CheeseName</td>
+                    <td><input type="text" th:field="*{cheeseName}" /></td>
+                    <td th:if="${#fields.hasErrors('cheeseName')}" th:errors="*{cheeseName}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><input type="number" placeholder="0.00" min="0" value="0" step="0.01" th:field="*{price}" /></td>
+                    <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</td>
+                </tr>  
+                <td>Stock</td>
+                <td><input type="number" th:field="*{stock}" /></td>
+                <td th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">Stock Error</td>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>

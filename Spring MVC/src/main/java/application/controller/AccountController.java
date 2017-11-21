@@ -7,7 +7,6 @@ package application.controller;
 
 import application.model.Account;
 import application.model.repository.AccountRepository;
-import application.security.SCryptPasswordEncoder;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,14 +28,10 @@ public class AccountController {
 
     @Autowired
     private AccountRepository accountDao;
-/*
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
-*/
-    @Autowired
-    private SCryptPasswordEncoder encoder;
-    
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("accounts", accountDao.findAll());
@@ -62,14 +57,13 @@ public class AccountController {
     public String processAddAccount(@ModelAttribute @Valid Account newAccount,
             Errors errors, Model model) {
 
-        if (errors.hasErrors()) {
+        if (accountDao.findByUsername(newAccount.getUsername()) != null) {
             model.addAttribute("title", "Add Account");
-            errors.toString();
+            model.addAttribute("error", "Username allready exists!");
             return "account/add";
         }
         newAccount.setTheRole("USER");
-        newAccount.setPassword(encoder.encode(newAccount.getPassword()));
-       // newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
+        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
         return "redirect:/main";
     }
@@ -78,23 +72,22 @@ public class AccountController {
     public String displayAddADMINAccount(Model model) {
         model.addAttribute("title", "Add ADMIN Account");
         model.addAttribute(new Account());
-        return "account/addAdmin";
+        return "account/add";
     }
 
     @RequestMapping(value = "addAdmin", method = RequestMethod.POST)
     public String processAddADMINAccount(@ModelAttribute @Valid Account newAccount,
             Errors errors, Model model) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add ADMIN Account");
-            errors.toString();
-            return "account/addAdmin";
+        if (accountDao.findByUsername(newAccount.getUsername()) != null) {
+            model.addAttribute("title", "Add Account");
+            model.addAttribute("error", "Username allready exists!");
+            return "account/add";
         }
         newAccount.setTheRole("ADMIN");
-         newAccount.setPassword(encoder.encode(newAccount.getPassword()));
-        //newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
+        newAccount.setPassword(bCryptPasswordEncoder.encode(newAccount.getPassword()));
         accountDao.save(newAccount);
-        return "redirect:/main";
+        return "redirect:/adminmain";
     }
 
     @RequestMapping(value = "remove/{accountID}", method = RequestMethod.GET)
@@ -123,8 +116,7 @@ public class AccountController {
 
         String Pass = editAccount.getPassword();
         editAccount = accountDao.findOne(editAccount.getAccountID());
-         editAccount.setPassword(encoder.encode(editAccount.getPassword()));
-       // editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
+        editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
         accountDao.save(editAccount);
         return "redirect:/account/";
     }

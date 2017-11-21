@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Client</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <a href="/client">Clients</a>
+        <a href="/cheese">Cheeses</a>
+        <a href="/address">Addresses</a>
+        <a href="/account">Accounts</a>
+        <a href="/addresstype">AddressTypes</a>
+        <a href="/order">Orders</a>
+        <br></br>
+        <p>To add a Client Account, go to Accounts and then click add Client next to your Account.</p>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>E-Mail</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+
+                    <tr th:each="client : ${clients}">
+                        <td th:text="${client.clientID}"></td>
+                        <td th:text="${client.firstName}"></td>
+                        <td th:text="${client.lastName}"></td>
+                        <td th:text="${client.eMail}"></td>
+                        <td><a th:href="${'/client/' + client.clientID}">View</a></td>
+                        <td><a th:href="${'/client/edit/' + client.clientID}">Edit</a></td>
+                        <td><a th:href="${'/client/remove/' + client.clientID}">Delete</a></td>
+                    </tr>
+
+                </table>
+
+
+
+            </body>
+        </html>

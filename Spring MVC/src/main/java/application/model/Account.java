@@ -28,10 +28,10 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long accountID;
     @Column(unique = true)
+    @NotNull(message = "Username allready exists!")
     private String username;
     private String password;
     private String theRole;
-
 
     @OneToOne
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+
+            <table style="width:80%">
+
+                    <tr>
+                        <th>AccountID</th>
+                        <th>UserName</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                    <tr th:each="account : ${account}">
+                         <td th:text="${account.accountID}"></td>
+                        <td th:text="${account.username}"></td>
+                        <td th:text="${account.password}"></td>
+                        <td th:text="${account.theRole}"></td>
+
+                    </tr>
+                </table>
+                <form method="POST">
+                    <p>Are you sure you want to delete this Account?</p>
+                    <button type="submit">Submit</button>
+                </form>
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

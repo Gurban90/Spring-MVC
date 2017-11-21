@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="POST" th:object="${account}">
+            <input type="hidden" th:field="*{accountID}"/>
+            <table>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" required="required" th:field="*{password}" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>
+
+

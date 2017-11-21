@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <table>
+            <tr>
+                <td>ClientID:</td>
+                <td th:text="${address.client.clientID}"></td>
+
+            </tr>
+            <tr>
+                <td>AddressType:</td>
+                <td th:text="${address.addresstype.addressTypeName}"></td>
+            </tr>
+        </table>
+        <br></br>
+
+        <form method="POST" th:object="${address}">
+            <input type="hidden" th:field="*{addressID}"/>
+            <table>
+                <tr>
+                    <td>Housenumber</td>
+                    <td><input type="number" min="0" th:field="*{housenumber}" /></td>
+
+                </tr>
+                <tr>
+                    <td>Housenumber Addition</td>
+                    <td><input type="text" th:field="*{houseNumberAddition}" /></td>
+                </tr>
+                <tr>
+                    <td>Streetname</td>
+                    <td><input type="text" maxlength="10" minlength="1" th:field="*{streetname}" /></td>
+
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td><input type="text" maxlength="7" minlength="6" th:field="*{postalCode}" /></td>
+
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td><input type="text" maxlength="30" minlength="1" th:field="*{city}" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>
+
+

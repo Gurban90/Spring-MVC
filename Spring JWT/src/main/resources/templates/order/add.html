@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <p> Do you want to add an Order?</p>
+        <form method="post" th:object="${order}">
+            <table>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    
+                </tr>
+            </table>
+        </form>
+        <br>
+        </br>
+
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>

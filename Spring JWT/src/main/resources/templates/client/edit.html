@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="POST" th:object="${client}">
+            <input type="hidden" th:field="*{clientID}"/>
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td><input type="text" th:field="*{firstName}" /></td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" th:field="*{lastName}" /></td>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Price Error</td>
+                </tr>  
+                <tr>
+                    <td>E-Mail</td>
+                    <td><input type="text" th:field="*{eMail}" /></td>
+                    <td th:if="${#fields.hasErrors('eMail')}" th:errors="*{eMail}">Stock Error</td>
+                </tr>  
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>
+
+

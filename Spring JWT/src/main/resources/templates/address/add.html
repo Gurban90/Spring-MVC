@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="post" th:object="${address}">
+            <table>
+                <tr>
+                    <td>Housenumber</td>
+                    <td><input type="number" min="0" th:field="*{housenumber}" /></td>
+
+                </tr>
+                <tr>
+                    <td>Housenumber Addition</td>
+                    <td><input type="text" th:field="*{houseNumberAddition}" /></td>
+                </tr>
+                <tr>
+                    <td>Streetname</td>
+                    <td><input type="text" maxlength="10" minlength="1" th:field="*{streetname}" /></td>
+
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td><input type="text" maxlength="7" minlength="6" th:field="*{postalCode}" /></td>
+
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td><input type="text" maxlength="30" minlength="1" th:field="*{city}" /></td>
+
+                </tr>
+                <tr>
+                    <td>AddressType</td>
+                    <td>
+                        <select name="addressTypeID">
+                            <option th:each="addresstype : ${addresstypes}"
+                                    th:text="${addresstype.addressTypeName}"
+                                    th:value="${addresstype.addressTypeID}"></option>
+                        </select>   
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+          <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>

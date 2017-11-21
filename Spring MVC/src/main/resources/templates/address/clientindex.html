@@ -4,15 +4,36 @@
     <head>
         <title th:text="${title}">Address</title>
         <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
+        <style>
+#a1:link, #a1:visited {
+    background-color: blue;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+#a1:hover, #a1:active {
+    background-color: green;
+}
+</style>
     <body>
-        <h1 th:text="${title}">Default Title</h1>
-        <a href="/clientclient">Clients</a>
-        <a href="/clientcheese">Cheeses</a>
-        <a href="/clientaddress">Addresses</a>
-        <a href="/clientaccount">Accounts</a>
-        <a href="/clientorder">Orders</a><br></br>
-        <a href="/clientaddress/add">Add Address</a>
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
+        <br></br>
+        <a id="a1" href="/clientaddress/add">Add Address</a>
 
         <style>
             table, th, td {

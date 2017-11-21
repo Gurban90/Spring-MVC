@@ -1,6 +1,5 @@
 package application;
 
-import application.security.SCryptPasswordEncoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SpringMvcApplication {
     
     @Bean
-    public SCryptPasswordEncoder SCryptPasswordEncoder() {
-        return new SCryptPasswordEncoder();
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 	public static void main(String[] args) {

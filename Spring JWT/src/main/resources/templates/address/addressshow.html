@@ -1,0 +1,63 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Address</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>HouseNumber</th>
+                        <th>HouseNumber Addition</th>
+                        <th>Streetname</th>
+                        <th>Postal Code</th>
+                        <th>City</th>
+                        <th>ClientID</th>
+                        <th>AddressTypeID</th>
+                    </tr>
+                    <tr th:each="address : ${address}">
+                        <td th:text="${address.addressID}"></td>
+                        <td th:text="${address.housenumber}"></td>
+                        <td th:text="${address.houseNumberAddition}"></td>
+                        <td th:text="${address.streetname}"></td>
+                        <td th:text="${address.postalCode}"></td>
+                        <td th:text="${address.city}"></td>
+                        <td th:text="${address.client.clientID}"></td>
+                        <td th:text="${address.addresstype.addressTypeID}"></td>
+                    </tr>
+                </table>
+            <br>
+            </br>
+            
+            <table style="width:80%">
+
+                    <tr>
+                        <th>AddressTypeID</th>
+                        <th>AddressType</th>
+                       
+                    </tr>
+                    <tr th:each="addresstype : ${addresstypes}">
+                        <td th:text="${addresstype.addressTypeID}"></td>
+                        <td th:text="${addresstype.addressTypeName}"></td>
+                       
+                    </tr>
+                </table>
+
+                <button onclick="goBack()">Go Back</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+
+            </body>
+        </html>

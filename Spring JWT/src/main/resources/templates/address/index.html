@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Address</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <a href="/client">Clients</a>
+        <a href="/cheese">Cheeses</a>
+        <a href="/address">Addresses</a>
+        <a href="/addresstype">AddressTypes</a>
+        <a href="/account">Accounts</a>
+        <a href="/order">Orders</a><br></br>
+        <a href="/address/add">Add Address</a>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>HouseNumber</th>
+                        <th>HouseNumberAddition</th>
+                        <th>Streetname</th>
+                        <th>Postal Code</th>
+                        <th>City</th>
+                        <th>ClientID</th>
+                        <th>AddressTypeID</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+
+                    <tr th:each="address : ${addresses}">
+                        <td th:text="${address.addressID}"></td>
+                        <td th:text="${address.housenumber}"></td>
+                        <td th:text="${address.houseNumberAddition}"></td>
+                        <td th:text="${address.streetname}"></td>
+                        <td th:text="${address.postalCode}"></td>
+                        <td th:text="${address.city}"></td>
+                        <td th:text="${address.client.clientID}"></td>
+                        <td th:text="${address.addresstype.addressTypeID}"></td>
+                        <td><a th:href="${'/address/' + address.addressID}">View</a></td>
+                        <td><a th:href="${'/address/edit/' + address.addressID}">Edit</a></td>
+                        <td><a th:href="${'/address/remove/' + address.addressID}">Delete</a></td>
+                    </tr>
+
+                </table>
+
+
+            </body>
+        </html>

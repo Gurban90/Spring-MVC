@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
     <head>
         <title> Login </title>
-        
+        <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
-        <h3> Login </h3> 
+        <h1> Login </h1> 
         <p th:if="${param.error}" class="error">
             Bad Credentials  
         </p>
-        <form th:action="@{/login}" method="POST">
-            User Name : <input type="text" name="username"/> <br/><br/>
-            Password: <input type="password" name="password"/> <br/><br/>
-            <input type="submit" value="Login"/>
+        <form th:action="@{/app-login}" method="POST">
+            <table>
+                <tr>
+                    <td>UserName</td>
+                    <td><input type="text"  name="app_username"/></td>
+                </tr> 
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="app_password" /></td>
+                </tr> 
+                <tr>
+                    <td><input type="submit" value="Login"/></td>
+                </tr>
+            </table>
         </form>
     </body>
 </html> 

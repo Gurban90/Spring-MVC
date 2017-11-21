@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+
+        <form method="post" th:object="${orderdetail}">
+            <table>
+                <tr>
+                    <td>Cheese</td>
+                    <td>
+                        <select name="cheeseID">
+                            <option th:each="cheese : ${cheeses}"
+                                    th:text="${cheese.cheeseName}"
+                                    th:value="${cheese.cheeseID}"></option>
+                        </select>   
+                    </td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
+                    <td><input type="number" min="1" th:field="*{quantity}" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>

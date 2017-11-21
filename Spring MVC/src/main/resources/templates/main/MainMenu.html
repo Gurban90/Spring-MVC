@@ -8,24 +8,24 @@ and open the template in the editor.
     <head>
         <title th:text="${title}">Client</title>
         <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
         <h1 th:text="${title}">Default Title</h1>
-        <a href="/clientclient">Client Information</a>
-        <a href="/clientcheese">Cheeses</a>
-        <a href="/clientaddress">Your Addresses</a>
-        <a href="/clientaccount">Account Information</a>
-        <a href="/clientorder">Orders</a>
-        <a href="/adminmain">Admin</a>
         <br></br>
-        <p>Welcome!</p>
-        <a href="/account/add">Add Account</a>
-        <br></br>
-        <a href="/security/login">Login</a>
-        <br>
-        </br>
-        <form th:action="@{/app-logout}" method="POST">
-            <input type="submit" value="Logout"/>
-        </form>
+        <p>Welcome to the world of Cheese!</p>
+        <p><img src="css/Cheese.jpg" alt="Cheese" /></p>
     </body>
 </html>

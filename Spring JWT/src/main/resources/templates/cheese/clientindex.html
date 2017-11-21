@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Address</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <a href="/clientclient">Clients</a>
+        <a href="/clientcheese">Cheeses</a>
+        <a href="/clientaddress">Addresses</a>
+        <a href="/clientaccount">Accounts</a>
+        <a href="/clientorder">Orders</a><br></br>
+
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>View</th>
+                        
+                    </tr>
+
+                    <tr th:each="cheese : ${cheeses}">
+                        <td th:text="${cheese.cheeseID}"></td>
+                        <td th:text="${cheese.cheeseName}"></td>
+                        <td th:text="${cheese.price}"></td>
+                        <td th:text="${cheese.stock}"></td>
+                        <td><a th:href="${'/clientcheese/' + cheese.cheeseID}">View</a></td>
+
+                    </tr>
+
+                </table>
+
+
+            </body>
+        </html>

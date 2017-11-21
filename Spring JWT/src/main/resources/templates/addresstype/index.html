@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <title th:text="${title}">Address</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="${title}">Default Title</h1>
+        <a href="/client">Clients</a>
+        <a href="/cheese">Cheeses</a>
+        <a href="/address">Addresses</a>
+        <a href="/addresstype">AddressTypes</a>
+        <a href="/account">Accounts</a>
+        <a href="/order">Orders</a><br></br>
+        <a href="/addresstype/add">Add AddressType</a>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: left;
+            </style>
+            <table style="width:80%">
+
+                    <tr>
+                        <th>Id</th>
+                        <th>AddressType</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+
+                    <tr th:each="addresstype : ${addresstypes}">
+                        <td th:text="${addresstype.addressTypeID}"></td>
+                        <td th:text="${addresstype.addressTypeName}"></td>
+                        <td><a th:href="${'/addresstype/' + addresstype.addressTypeID}">View</a></td>
+                        <td><a th:href="${'/addresstype/edit/' + addresstype.addressTypeID}">Edit</a></td>
+                        <td><a th:href="${'/addresstype/remove/' + addresstype.addressTypeID}">Delete</a></td>
+                    </tr>
+
+                </table>
+
+
+            </body>
+        </html>

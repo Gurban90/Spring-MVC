@@ -4,11 +4,11 @@
     <head>
         <title th:text="${title}">Title</title>
         <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
         <h1 th:text="${title}">Default Title</h1>
-
-        <form method="post" th:object="${client}">
+                <form method="post" th:object="${client}">
             <table>
                 <tr>
                     <td>First Name</td>

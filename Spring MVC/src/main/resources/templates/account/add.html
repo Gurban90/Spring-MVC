@@ -4,34 +4,40 @@
     <head>
         <title th:text="${title}">Title</title>
         <meta charset="UTF-8" />
+        <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
         <h1 th:text="${title}">Default Title</h1>
 
         <form method="post" th:object="${account}">
             <table>
-                 <tr>
+                <tr>
                     <td>UserName</td>
                     <td><input type="text" th:field="*{username}" /></td>
-                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">UserName Error</td>
+                    <td th:text="${error}" style="color:red"></td>
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" th:field="*{password}" /></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                    <td><input type="password" th:field="*{password}" required="required"/></td>
                 </tr>
-                
+
                 <tr>
                     <td><button type="submit">Submit</button></td>
                     <td><button type="reset">Reset</button></td>
                 </tr>
             </table>
         </form>
-        <button onclick="goBack()">Go Back</button>
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
     </body>
 </html>

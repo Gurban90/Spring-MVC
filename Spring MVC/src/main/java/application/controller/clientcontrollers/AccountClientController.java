@@ -32,9 +32,9 @@ public class AccountClientController {
     @Autowired
     private AccountRepository accountDao;
 
-    /*@Autowired
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-*/
+
     @Autowired
     private AccountChecker checker;
 
@@ -95,7 +95,7 @@ public class AccountClientController {
 
             String Pass = editAccount.getPassword();
             editAccount = accountDao.findOne(editAccount.getAccountID());
-//            editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
+            editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
             accountDao.save(editAccount);
             return "redirect:/account/";
         } else {
