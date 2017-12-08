@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -73,7 +72,7 @@ public class OrderClientController {
     public String processAddOrder(Orders newOrder, Model model) {
       
         orderService.addOrder(checker.getClientIDofUser(), newOrder);
-        return "redirect:/order/";
+        return "redirect:/clientorder/";
     }
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.GET)
@@ -90,7 +89,6 @@ public class OrderClientController {
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.POST)
     public String processRemoveOrderForm(@PathVariable int orderID) {
         if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
-
             orderDao.delete(orderID);
             return "redirect:/order/";
         } else {

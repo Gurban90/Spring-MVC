@@ -5,6 +5,18 @@
         <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
         <h1 th:text="${title}">Default Title</h1>
 
         <style>
@@ -68,16 +80,8 @@
                         <td th:text="${orders.orderDate}"></td>
                         <td th:text="${orders.processedDate}"></td>
                         <td th:text="${orders.totalPrice}"></td>
-                         <td><a th:href="${'/order/' + orders.ordersID}">View</a></td>
+                        <td><a th:href="${'/order/' + orders.ordersID}">View</a></td>
                     </tr>
                 </table>
-
-                <button onclick="goBack()">Go Back</button>
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
-
             </body>
         </html>

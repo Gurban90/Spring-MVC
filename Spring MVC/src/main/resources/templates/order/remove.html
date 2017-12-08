@@ -6,6 +6,18 @@
         <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
     <body>
+        <ul>
+            <li><a href="/main">Home</a></li>
+            <li><a href="/clientclient">Client Information</a></li>
+            <li><a href="/clientcheese">Cheeses</a></li>
+            <li><a href="/clientaddress">Your Addresses</a></li>
+            <li><a href="/clientaccount">Account Information</a></li>
+            <li><a href="/clientorder">Orders</a></li>
+            <li><a href="/adminmain">Admin</a></li>
+            <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+            <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+            <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+        </ul>
         <h1 th:text="${title}">Default Title</h1>
         <style>
             table, th, td {
@@ -18,13 +30,13 @@
             <table style="width:80%">
 
                     <tr>
-                       <th>Id</th>
+                        <th>Id</th>
                         <th>Order Date</th>
                         <th>Processed Date</th>
                         <th>Total Price</th>
                         <th>ClientID</th>
                     </tr>
-                     <tr th:each="orders : ${order}">
+                    <tr th:each="orders : ${order}">
                         <td th:text="${orders.ordersID}"></td>
                         <td th:text="${orders.orderDate}"></td>
                         <td th:text="${orders.processedDate}"></td>
@@ -36,12 +48,5 @@
                     <p>Are you sure you want to delete this Order?</p>
                     <button type="submit">Submit</button>
                 </form>
-                <button onclick="goBack()">Go Back</button>
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
-
             </body>
         </html>

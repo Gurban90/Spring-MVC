@@ -6,25 +6,42 @@
         <meta charset="UTF-8" />
         <link type="text/css" href="css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
     </head>
-    <body>
-        <h1 th:text="${title}">Default Title</h1>
-        <a href="/client">Clients</a>
-        <a href="/cheese">Cheeses</a>
-        <a href="/address">Addresses</a>
-        <a href="/addresstype">AddressTypes</a>
-        <a href="/account">Accounts</a>
-        <a href="/order">Orders</a><br></br>
-        <a href="/order/add">Add Order</a>
-
-        <style>
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 5px;
-                text-align: left;
-            </style>
+    <style>
+        #a1:link, #a1:visited {
+            background-color: blue;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        #a1:hover, #a1:active {
+            background-color: green;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: left;
+        </style>
+        <body>
+            <ul>
+                <li><a href="/main">Home</a></li>
+                <li><a href="/clientclient">Client Information</a></li>
+                <li><a href="/clientcheese">Cheeses</a></li>
+                <li><a href="/clientaddress">Your Addresses</a></li>
+                <li><a href="/clientaccount">Account Information</a></li>
+                <li><a href="/clientorder">Orders</a></li>
+                <li><a href="/adminmain">Admin</a></li>
+                <li style="background:navy;"><a href="/account/add">Add Account</a></li>
+                <li style="background:darkgoldenrod;"><a href="/security/login">Login</a></li>
+                <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
+            </ul>
+            <br></br>
+            <a id="a1" href="/clientorder/add">Add Order</a>
+            <h1 th:text="${title}">Default Title</h1>
+            <p>To add products to your order, click the add button next to the order.</p>
             <table style="width:80%">
-
                     <tr>
                         <th>Id</th>
                         <th>Order Date</th>
@@ -35,7 +52,6 @@
                         <th>View</th>
                         <th>Delete</th>
                     </tr>
-
                     <tr th:each="orders : ${orders}">
                         <td th:text="${orders.ordersID}"></td>
                         <td th:text="${orders.orderDate}"></td>
@@ -46,9 +62,6 @@
                         <td><a th:href="${'/order/' + orders.ordersID}">View</a></td>
                         <td><a th:href="${'/order/remove/' + orders.ordersID}">Delete</a></td>
                     </tr>
-
                 </table>
-
-
             </body>
         </html>
