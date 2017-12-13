@@ -6,18 +6,13 @@
 package application.controller;
 
 import application.model.Address;
-import application.model.AddressType;
-import application.model.Client;
 import application.model.repository.AddressRepository;
 import application.model.repository.AddressTypeRepository;
 import application.model.repository.ClientRepository;
 import application.service.AddressServiceImpl;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,13 +59,12 @@ public class AddressController {
         model.addAttribute(new Address());
         model.addAttribute("clients", clientDao.findAll());
         model.addAttribute("addresstypes", addressTypeDao.findAll());
-        return "address/add";
+        return "address/adminadd";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddAddress(Address newAddress,
             @RequestParam int clientID, @RequestParam int addressTypeID, Model model) {
-
         addressService.addAddress(clientID, addressTypeID, newAddress);
         return "redirect:/main";
     }
@@ -85,7 +79,6 @@ public class AddressController {
     @RequestMapping(value = "remove/{addressID}", method = RequestMethod.POST)
     public String processRemoveAddressForm(@PathVariable int addressID) {
         addressDao.delete(addressID);
-
         return "redirect:/address/";
     }
 
@@ -102,7 +95,6 @@ public class AddressController {
 
     @RequestMapping(value = "edit/{addressID}", method = RequestMethod.POST)
     public String processEditAddressForm(Address editAddress, Model model) {
-
         addressService.editAddress(editAddress);
         return "redirect:/address/";
     }

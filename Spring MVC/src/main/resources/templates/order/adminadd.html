@@ -20,19 +20,18 @@
             <li style="background:darkred;"><a th:href="@{/app-logout}">Logout</a></li>
         </ul>
         <h1 th:text="${title}">Default Title</h1>
-        <form method="post" th:object="${client}">
+        <p> For which client do you want to add a new Order?</p>
+        <form method="post" th:object="${orders}">
             <table>
                 <tr>
-                    <td>First Name</td>
-                    <td><input type="text" maxlength="30" minlength="1" required="required" th:field="*{firstName}" /></td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td><input type="text" maxlength="30" minlength="1" required="required" th:field="*{lastName}" /></td>
-                </tr>  
-                <tr>
-                    <td>E-Mail</td>
-                    <td><input type="email" maxlength="30" minlength="1" required="required" th:field="*{eMail}" /></td>
+                    <td>ClientID</td>
+                    <td>
+                        <select name="clientID">
+                            <option th:each="client : ${clients}"
+                                    th:text="${client.clientID}"
+                                    th:value="${client.clientID}"></option>
+                        </select>   
+                    </td>
                 </tr>
                 <tr>
                     <td><button type="submit">Submit</button></td>
@@ -40,5 +39,14 @@
                 </tr>
             </table>
         </form>
+        <br>
+        </br>
+
+        <button onclick="goBack()">Go Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
     </body>
 </html>

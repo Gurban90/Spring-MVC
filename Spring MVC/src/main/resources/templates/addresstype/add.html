@@ -12,8 +12,7 @@
             <table>
                 <tr>
                     <td>AddressType</td>
-                    <td><input type="text" th:field="*{addressTypeName}"/></td>
-                    <td th:if="${#fields.hasErrors('addressTypeName')}" th:errors="*{addressTypeName}">AddressType Error</td>
+                    <td><input type="text" maxlength="15"  required="required" th:field="*{addressTypeName}"/></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Submit</button></td>

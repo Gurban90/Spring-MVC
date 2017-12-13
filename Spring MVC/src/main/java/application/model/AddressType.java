@@ -12,10 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -28,8 +24,6 @@ public class AddressType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressTypeID;
 
-    @NotNull
-    @Size(min = 3, max = 30)
     private String addressTypeName;
 
     @OneToMany(mappedBy = "addresstype")

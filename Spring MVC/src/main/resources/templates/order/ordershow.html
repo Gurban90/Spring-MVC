@@ -56,8 +56,8 @@
                         <td th:text="${orderdetail.orderDetailID}"></td>
                         <td th:text="${orderdetail.quantity}"></td>
                         <td th:text="${orderdetail.cheese.cheeseName}"></td>
-                        <td><a th:href="${'/orderdetail/edit/' + orderdetail.orderDetailID}">Edit</a></td>
-                        <td><a th:href="${'/orderdetail/remove/' + orderdetail.orderDetailID}">Delete</a></td>
+                        <td><a th:href="${'/clientorderdetail/edit/' + orderdetail.orderDetailID}">Edit</a></td>
+                        <td><a th:href="${'/clientorderdetail/remove/' + orderdetail.orderDetailID}">Delete</a></td>
                     </tr>
                 </table>
             </body>

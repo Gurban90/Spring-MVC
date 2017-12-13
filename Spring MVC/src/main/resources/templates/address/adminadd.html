@@ -57,6 +57,16 @@
                         </select>   
                     </td>
                 </tr>
+                 <tr>
+                    <td>ClientID</td>
+                    <td>
+                        <select name="clientID">
+                            <option th:each="client : ${clients}"
+                                    th:text="${client.clientID}"
+                                    th:value="${client.clientID}"></option>
+                        </select>   
+                    </td>
+                </tr>
                 <tr>
                     <td><button type="submit">Submit</button></td>
                     <td><button type="reset">Reset</button></td>

@@ -48,19 +48,19 @@ public class OrdersController {
         model.addAttribute("orderdetails", orderDao.findOne(orderID).getOrderDetails());
         return "order/ordershow";
     }
+        
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddOrder(Model model) {
         model.addAttribute("title", "Add Order");
         model.addAttribute(new Orders());
         model.addAttribute("clients", clientDao.findAll());
-        return "order/add";
+        return "order/adminadd";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddOrder(@RequestParam int clientID, Orders newOrder, Model model) {
-
-        orderService.addOrder(clientID, newOrder);
+        orderService.adminAddOrder(clientID, newOrder);
         return "redirect:/order/";
     }
 
@@ -73,7 +73,7 @@ public class OrdersController {
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.POST)
     public String processRemoveOrderForm(@PathVariable int orderID) {
-        orderDao.delete(orderID);
+        orderService.removeOrder(orderID);
         return "redirect:/order/";
     }
 

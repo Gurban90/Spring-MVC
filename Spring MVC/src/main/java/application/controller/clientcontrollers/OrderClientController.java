@@ -70,9 +70,8 @@ public class OrderClientController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddOrder(Orders newOrder, Model model) {
-      
         orderService.addOrder(checker.getClientIDofUser(), newOrder);
-        return "redirect:/clientorder/";
+        return "redirect:/clientorder";
     }
 
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.GET)
@@ -89,8 +88,8 @@ public class OrderClientController {
     @RequestMapping(value = "remove/{orderID}", method = RequestMethod.POST)
     public String processRemoveOrderForm(@PathVariable int orderID) {
         if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
-            orderDao.delete(orderID);
-            return "redirect:/order/";
+            orderService.removeOrder(orderID);
+            return "redirect:/clientorder";
         } else {
             return "security/error";
         }

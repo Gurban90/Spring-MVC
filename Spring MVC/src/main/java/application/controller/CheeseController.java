@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -73,9 +72,12 @@ public class CheeseController {
 
     @RequestMapping(value = "remove/{cheeseID}", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@PathVariable int cheeseID) {
-        cheeseDao.delete(cheeseID);
-
-        return "redirect:/cheese/";
+        try {
+            cheeseDao.delete(cheeseID);
+            return "redirect:/cheese/";
+        } catch (Exception E) {
+            return "security/error3";
+        }
     }
 
     @RequestMapping(value = "edit/{cheeseID}", method = RequestMethod.GET)

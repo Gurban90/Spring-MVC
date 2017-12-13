@@ -58,9 +58,9 @@
                         <td th:text="${orders.processedDate}"></td>
                         <td th:text="${orders.totalPrice}"></td>
                         <td th:text="${orders.client.clientID}"></td>
-                        <td><a th:href="${'/orderdetail/add/' + orders.ordersID}">Add</a></td>
-                        <td><a th:href="${'/order/' + orders.ordersID}">View</a></td>
-                        <td><a th:href="${'/order/remove/' + orders.ordersID}">Delete</a></td>
+                        <td><a th:href="${'/clientorderdetail/add/' + orders.ordersID}">Add</a></td>
+                        <td><a th:href="${'/clientorder/' + orders.ordersID}">View</a></td>
+                        <td><a th:href="${'/clientorder/remove/' + orders.ordersID}">Delete</a></td>
                     </tr>
                 </table>
             </body>

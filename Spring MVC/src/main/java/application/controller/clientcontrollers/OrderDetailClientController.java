@@ -73,7 +73,7 @@ public class OrderDetailClientController {
             @PathVariable int orderID, OrderDetail newOrderDetail, @RequestParam int quantity, Model model) {
         if (orderDao.findOne(orderID).getClient().getClientID() == checker.getClientIDofUser()) {
             orderDetailService.addOrderDetail(orderID, cheeseID, newOrderDetail);
-            return "redirect:/order";
+            return "redirect:/clientorder";
         } else {
             return "security/error";
         }
@@ -95,7 +95,7 @@ public class OrderDetailClientController {
     public String processRemoveOrderDetailForm(@PathVariable int orderDetailID) {
         if (orderDetailDao.findOne(orderDetailID).getOrders().getClient().getClientID() == checker.getClientIDofUser()) {
             orderDetailService.removeOrderDetail(orderDetailID, orderDetailDao.findOne(orderDetailID).getQuantity());
-            return "redirect:/order";
+            return "redirect:/clientorder";
         } else {
             return "security/error";
         }
@@ -124,7 +124,7 @@ public class OrderDetailClientController {
                 return "orderdetail/edit";
             }
             orderDetailService.editOrderDetail(editOrderDetail);
-            return "redirect:/order";
+            return "redirect:/clientorder";
         } else {
             return "security/error";
         }

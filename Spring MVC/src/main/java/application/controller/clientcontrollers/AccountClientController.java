@@ -8,10 +8,7 @@ package application.controller.clientcontrollers;
 import application.helper.AccountChecker;
 import application.model.Account;
 import application.model.repository.AccountRepository;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,7 +68,7 @@ public class AccountClientController {
     public String processRemoveAccountForm(@PathVariable long accountID) {
         if (accountDao.findOne(accountID).getUsername().equals(checker.getUserName())) {
             accountDao.delete(accountID);
-            return "redirect:/account/";
+            return "redirect:/clientaccount";
         } else {
             return "security/error";
         }
@@ -97,7 +94,7 @@ public class AccountClientController {
             editAccount = accountDao.findOne(editAccount.getAccountID());
             editAccount.setPassword(bCryptPasswordEncoder.encode(Pass));
             accountDao.save(editAccount);
-            return "redirect:/account/";
+            return "redirect:/clientaccount";
         } else {
             return "security/error";
         }

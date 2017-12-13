@@ -7,18 +7,13 @@ package application.controller.clientcontrollers;
 
 import application.helper.AccountChecker;
 import application.model.Address;
-import application.model.AddressType;
-import application.model.Client;
 import application.model.repository.AddressRepository;
 import application.model.repository.AddressTypeRepository;
 import application.model.repository.ClientRepository;
 import application.service.AddressServiceImpl;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,7 +96,7 @@ public class AddressClientController {
     public String processRemoveAddressForm(@PathVariable int addressID) {
         if (addressDao.findOne(addressID).getClient().getClientID() == checker.getClientIDofUser()) {
             addressDao.delete(addressID);
-            return "redirect:/address/";
+            return "redirect:/clientaddress";
         } else {
             return "security/error";
         }
@@ -126,7 +121,7 @@ public class AddressClientController {
     public String processEditAddressForm(Address editAddress, Model model) {
         if (addressDao.findOne(editAddress.getAddressID()).getClient().getClientID() == checker.getClientIDofUser()) {
             addressService.editAddress(editAddress);
-            return "redirect:/address/";
+            return "redirect:/clientaddress";
         } else {
             return "security/error";
         }

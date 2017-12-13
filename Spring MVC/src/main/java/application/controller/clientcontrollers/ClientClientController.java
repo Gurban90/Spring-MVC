@@ -6,13 +6,10 @@
 package application.controller.clientcontrollers;
 
 import application.helper.AccountChecker;
-import application.model.Account;
 import application.model.Client;
 import application.model.repository.AccountRepository;
-import application.model.repository.AddressRepository;
 import application.model.repository.ClientRepository;
 import application.service.ClientServiceImpl;
-//import application.service.ClientServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -110,7 +106,7 @@ public class ClientClientController {
     public String processRemoveClientForm(@PathVariable int clientID) {
         if (checker.getClientIDofUser() == clientID) {
             clientDao.delete(clientID);
-            return "redirect:/client/";
+            return "redirect:/clientclient";
         } else {
             return "security/error";
         }
@@ -137,7 +133,7 @@ public class ClientClientController {
                 return "client/edit";
             }
             clientDao.save(editClient);
-            return "redirect:/client/";
+            return "redirect:/clientclient";
         } else {
             return "security/error";
         }
